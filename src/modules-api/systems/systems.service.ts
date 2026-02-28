@@ -1,6 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../modules-system/prisma/prisma.service';
-import { CreateHeThongRapDto, UpdateHeThongRapDto, CreateCumRap, UpdateCumRap, CreateRapPhim, UpdateRapPhim } from './dto/systems.dto';
+import {
+  CreateHeThongRapDto,
+  UpdateHeThongRapDto,
+  CreateCumRap,
+  UpdateCumRap,
+  CreateRapPhim,
+  UpdateRapPhim,
+} from './dto/systems.dto';
 import { deleteFile } from '../../common/helper/delete-file.helper';
 
 @Injectable()
@@ -31,7 +38,7 @@ export class SystemsService {
 
     if (!heThongRap) {
       // nếu không tìm thấy hệ thống rạp, xóa file logo mới vừa upload nếu có
-      deleteFile(imagePath)
+      deleteFile(imagePath);
       throw new NotFoundException('Không tìm thấy hệ thống rạp');
     }
 
@@ -92,7 +99,7 @@ export class SystemsService {
   }
 
   async createCinemaComplex(body: CreateCumRap) {
-    const ma_he_thong_rap = parseInt(body.ma_he_thong_rap);
+    const ma_he_thong_rap = body.ma_he_thong_rap;
 
     // Kiểm tra hệ thống rạp có tồn tại không
     const heThongRap = await this.prisma.heThongRap.findUnique({
@@ -115,7 +122,7 @@ export class SystemsService {
   }
 
   async updateCinemaComplex(body: UpdateCumRap) {
-    const ma_cum_rap = parseInt(body.ma_cum_rap);
+    const ma_cum_rap = body.ma_cum_rap;
 
     // Kiểm tra cụm rạp có tồn tại không
     const cumRap = await this.prisma.cumRap.findUnique({
@@ -128,7 +135,7 @@ export class SystemsService {
 
     // Nếu có ma_he_thong_rap mới, kiểm tra có tồn tại không
     if (body.ma_he_thong_rap) {
-      const ma_he_thong_rap = parseInt(body.ma_he_thong_rap);
+      const ma_he_thong_rap = body.ma_he_thong_rap;
       const heThongRap = await this.prisma.heThongRap.findUnique({
         where: { ma_he_thong_rap },
       });
@@ -142,7 +149,8 @@ export class SystemsService {
     const dataToUpdate: any = {};
     if (body.ten_cum_rap) dataToUpdate.ten_cum_rap = body.ten_cum_rap;
     if (body.dia_chi) dataToUpdate.dia_chi = body.dia_chi;
-    if (body.ma_he_thong_rap) dataToUpdate.ma_he_thong_rap = parseInt(body.ma_he_thong_rap);
+    if (body.ma_he_thong_rap)
+      dataToUpdate.ma_he_thong_rap = body.ma_he_thong_rap;
 
     const updated = await this.prisma.cumRap.update({
       where: { ma_cum_rap },
@@ -201,7 +209,7 @@ export class SystemsService {
   }
 
   async createCinema(body: CreateRapPhim) {
-    const ma_cum_rap = parseInt(body.ma_cum_rap);
+    const ma_cum_rap = body.ma_cum_rap;
 
     // Kiểm tra cụm rạp có tồn tại không
     const cumRap = await this.prisma.cumRap.findUnique({
@@ -223,7 +231,7 @@ export class SystemsService {
   }
 
   async updateCinema(body: UpdateRapPhim) {
-    const ma_rap = parseInt(body.ma_rap);
+    const ma_rap = body.ma_rap;
 
     // Kiểm tra rạp có tồn tại không
     const rapPhim = await this.prisma.rapPhim.findUnique({
@@ -236,7 +244,7 @@ export class SystemsService {
 
     // Nếu có ma_cum_rap mới, kiểm tra có tồn tại không
     if (body.ma_cum_rap) {
-      const ma_cum_rap = parseInt(body.ma_cum_rap);
+      const ma_cum_rap = body.ma_cum_rap;
       const cumRap = await this.prisma.cumRap.findUnique({
         where: { ma_cum_rap },
       });
@@ -249,7 +257,7 @@ export class SystemsService {
     // Chuẩn bị data để update
     const dataToUpdate: any = {};
     if (body.ten_rap) dataToUpdate.ten_rap = body.ten_rap;
-    if (body.ma_cum_rap) dataToUpdate.ma_cum_rap = parseInt(body.ma_cum_rap);
+    if (body.ma_cum_rap) dataToUpdate.ma_cum_rap = body.ma_cum_rap;
 
     const updated = await this.prisma.rapPhim.update({
       where: { ma_rap },
@@ -276,35 +284,36 @@ export class SystemsService {
   }
 
   async getCinemasByComplexId(ma_cum_rap: number) {
-    // Kiểm tra cụm rạp có tồn tại không
+    // tìm cụm rạp và toàn bộ danh sách rạp thuộc cụm đó
     const cumRap = await this.prisma.cumRap.findUnique({
       where: { ma_cum_rap },
-    });
-
-    if (!cumRap) {
-      throw new NotFoundException('Không tìm thấy cụm rạp');
-    }
-
-    const data = await this.prisma.rapPhim.findMany({
-      where: { ma_cum_rap },
-      orderBy: {
-        ma_rap: 'asc',
-      },
       include: {
-        CumRap: {
-          select: {
-            ma_cum_rap: true,
-            ten_cum_rap: true,
-            dia_chi: true,
-            ma_he_thong_rap: true,
+        RapPhim: {
+          include: {
+            _count: {
+              select: { Ghe: true }, // Đếm số lượng ghế trong mỗi rạp
+            },
           },
         },
       },
     });
 
+    // kiểm tra nếu không tìm thấy cụm rạp
+    if (!cumRap) {
+      throw new NotFoundException('Không tìm thấy cụm rạp');
+    }
+
+    // destructuring để tách danh sách rạp và đổi tên CumRap thành thong_tin_rap
+    const { RapPhim, ...thong_tin_rap } = cumRap;
+
+    // trả về format dữ liệu như cậu muốn
     return {
-      data,
-      total: data.length,
+      thong_tin_rap: thong_tin_rap,
+      danh_sach_rap: RapPhim.map((rap) => ({
+        ma_rap: rap.ma_rap,
+        ten_rap: rap.ten_rap,
+        so_luong_ghe: rap._count.Ghe, // Lấy số lượng từ field _count của Prisma
+      })),
     };
   }
 }

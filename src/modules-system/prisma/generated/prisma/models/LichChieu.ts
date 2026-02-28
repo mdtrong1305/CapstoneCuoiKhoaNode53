@@ -27,21 +27,21 @@ export type AggregateLichChieu = {
 }
 
 export type LichChieuAvgAggregateOutputType = {
-  ma_lich_chiu: number | null
+  ma_lich_chieu: number | null
   ma_rap: number | null
   ma_phim: number | null
   gia_ve: number | null
 }
 
 export type LichChieuSumAggregateOutputType = {
-  ma_lich_chiu: number | null
+  ma_lich_chieu: number | null
   ma_rap: number | null
   ma_phim: number | null
   gia_ve: number | null
 }
 
 export type LichChieuMinAggregateOutputType = {
-  ma_lich_chiu: number | null
+  ma_lich_chieu: number | null
   ma_rap: number | null
   ma_phim: number | null
   ngay_gio_chieu: Date | null
@@ -49,7 +49,7 @@ export type LichChieuMinAggregateOutputType = {
 }
 
 export type LichChieuMaxAggregateOutputType = {
-  ma_lich_chiu: number | null
+  ma_lich_chieu: number | null
   ma_rap: number | null
   ma_phim: number | null
   ngay_gio_chieu: Date | null
@@ -57,7 +57,7 @@ export type LichChieuMaxAggregateOutputType = {
 }
 
 export type LichChieuCountAggregateOutputType = {
-  ma_lich_chiu: number
+  ma_lich_chieu: number
   ma_rap: number
   ma_phim: number
   ngay_gio_chieu: number
@@ -67,21 +67,21 @@ export type LichChieuCountAggregateOutputType = {
 
 
 export type LichChieuAvgAggregateInputType = {
-  ma_lich_chiu?: true
+  ma_lich_chieu?: true
   ma_rap?: true
   ma_phim?: true
   gia_ve?: true
 }
 
 export type LichChieuSumAggregateInputType = {
-  ma_lich_chiu?: true
+  ma_lich_chieu?: true
   ma_rap?: true
   ma_phim?: true
   gia_ve?: true
 }
 
 export type LichChieuMinAggregateInputType = {
-  ma_lich_chiu?: true
+  ma_lich_chieu?: true
   ma_rap?: true
   ma_phim?: true
   ngay_gio_chieu?: true
@@ -89,7 +89,7 @@ export type LichChieuMinAggregateInputType = {
 }
 
 export type LichChieuMaxAggregateInputType = {
-  ma_lich_chiu?: true
+  ma_lich_chieu?: true
   ma_rap?: true
   ma_phim?: true
   ngay_gio_chieu?: true
@@ -97,7 +97,7 @@ export type LichChieuMaxAggregateInputType = {
 }
 
 export type LichChieuCountAggregateInputType = {
-  ma_lich_chiu?: true
+  ma_lich_chieu?: true
   ma_rap?: true
   ma_phim?: true
   ngay_gio_chieu?: true
@@ -192,7 +192,7 @@ export type LichChieuGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type LichChieuGroupByOutputType = {
-  ma_lich_chiu: number
+  ma_lich_chieu: number
   ma_rap: number | null
   ma_phim: number | null
   ngay_gio_chieu: Date | null
@@ -223,7 +223,7 @@ export type LichChieuWhereInput = {
   AND?: Prisma.LichChieuWhereInput | Prisma.LichChieuWhereInput[]
   OR?: Prisma.LichChieuWhereInput[]
   NOT?: Prisma.LichChieuWhereInput | Prisma.LichChieuWhereInput[]
-  ma_lich_chiu?: Prisma.IntFilter<"LichChieu"> | number
+  ma_lich_chieu?: Prisma.IntFilter<"LichChieu"> | number
   ma_rap?: Prisma.IntNullableFilter<"LichChieu"> | number | null
   ma_phim?: Prisma.IntNullableFilter<"LichChieu"> | number | null
   ngay_gio_chieu?: Prisma.DateTimeNullableFilter<"LichChieu"> | Date | string | null
@@ -234,7 +234,7 @@ export type LichChieuWhereInput = {
 }
 
 export type LichChieuOrderByWithRelationInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrderInput | Prisma.SortOrder
   ma_phim?: Prisma.SortOrderInput | Prisma.SortOrder
   ngay_gio_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -245,7 +245,7 @@ export type LichChieuOrderByWithRelationInput = {
 }
 
 export type LichChieuWhereUniqueInput = Prisma.AtLeast<{
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   AND?: Prisma.LichChieuWhereInput | Prisma.LichChieuWhereInput[]
   OR?: Prisma.LichChieuWhereInput[]
   NOT?: Prisma.LichChieuWhereInput | Prisma.LichChieuWhereInput[]
@@ -256,10 +256,10 @@ export type LichChieuWhereUniqueInput = Prisma.AtLeast<{
   DatVe?: Prisma.DatVeListRelationFilter
   RapPhim?: Prisma.XOR<Prisma.RapPhimNullableScalarRelationFilter, Prisma.RapPhimWhereInput> | null
   Phim?: Prisma.XOR<Prisma.PhimNullableScalarRelationFilter, Prisma.PhimWhereInput> | null
-}, "ma_lich_chiu">
+}, "ma_lich_chieu">
 
 export type LichChieuOrderByWithAggregationInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrderInput | Prisma.SortOrder
   ma_phim?: Prisma.SortOrderInput | Prisma.SortOrder
   ngay_gio_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -275,7 +275,7 @@ export type LichChieuScalarWhereWithAggregatesInput = {
   AND?: Prisma.LichChieuScalarWhereWithAggregatesInput | Prisma.LichChieuScalarWhereWithAggregatesInput[]
   OR?: Prisma.LichChieuScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LichChieuScalarWhereWithAggregatesInput | Prisma.LichChieuScalarWhereWithAggregatesInput[]
-  ma_lich_chiu?: Prisma.IntWithAggregatesFilter<"LichChieu"> | number
+  ma_lich_chieu?: Prisma.IntWithAggregatesFilter<"LichChieu"> | number
   ma_rap?: Prisma.IntNullableWithAggregatesFilter<"LichChieu"> | number | null
   ma_phim?: Prisma.IntNullableWithAggregatesFilter<"LichChieu"> | number | null
   ngay_gio_chieu?: Prisma.DateTimeNullableWithAggregatesFilter<"LichChieu"> | Date | string | null
@@ -291,7 +291,7 @@ export type LichChieuCreateInput = {
 }
 
 export type LichChieuUncheckedCreateInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_rap?: number | null
   ma_phim?: number | null
   ngay_gio_chieu?: Date | string | null
@@ -308,7 +308,7 @@ export type LichChieuUpdateInput = {
 }
 
 export type LichChieuUncheckedUpdateInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ma_phim?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -317,7 +317,7 @@ export type LichChieuUncheckedUpdateInput = {
 }
 
 export type LichChieuCreateManyInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_rap?: number | null
   ma_phim?: number | null
   ngay_gio_chieu?: Date | string | null
@@ -330,7 +330,7 @@ export type LichChieuUpdateManyMutationInput = {
 }
 
 export type LichChieuUncheckedUpdateManyInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ma_phim?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -343,7 +343,7 @@ export type LichChieuScalarRelationFilter = {
 }
 
 export type LichChieuCountOrderByAggregateInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrder
   ma_phim?: Prisma.SortOrder
   ngay_gio_chieu?: Prisma.SortOrder
@@ -351,14 +351,14 @@ export type LichChieuCountOrderByAggregateInput = {
 }
 
 export type LichChieuAvgOrderByAggregateInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrder
   ma_phim?: Prisma.SortOrder
   gia_ve?: Prisma.SortOrder
 }
 
 export type LichChieuMaxOrderByAggregateInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrder
   ma_phim?: Prisma.SortOrder
   ngay_gio_chieu?: Prisma.SortOrder
@@ -366,7 +366,7 @@ export type LichChieuMaxOrderByAggregateInput = {
 }
 
 export type LichChieuMinOrderByAggregateInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrder
   ma_phim?: Prisma.SortOrder
   ngay_gio_chieu?: Prisma.SortOrder
@@ -374,7 +374,7 @@ export type LichChieuMinOrderByAggregateInput = {
 }
 
 export type LichChieuSumOrderByAggregateInput = {
-  ma_lich_chiu?: Prisma.SortOrder
+  ma_lich_chieu?: Prisma.SortOrder
   ma_rap?: Prisma.SortOrder
   ma_phim?: Prisma.SortOrder
   gia_ve?: Prisma.SortOrder
@@ -500,7 +500,7 @@ export type LichChieuCreateWithoutDatVeInput = {
 }
 
 export type LichChieuUncheckedCreateWithoutDatVeInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_rap?: number | null
   ma_phim?: number | null
   ngay_gio_chieu?: Date | string | null
@@ -531,7 +531,7 @@ export type LichChieuUpdateWithoutDatVeInput = {
 }
 
 export type LichChieuUncheckedUpdateWithoutDatVeInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ma_phim?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -546,7 +546,7 @@ export type LichChieuCreateWithoutPhimInput = {
 }
 
 export type LichChieuUncheckedCreateWithoutPhimInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_rap?: number | null
   ngay_gio_chieu?: Date | string | null
   gia_ve?: number | null
@@ -583,7 +583,7 @@ export type LichChieuScalarWhereInput = {
   AND?: Prisma.LichChieuScalarWhereInput | Prisma.LichChieuScalarWhereInput[]
   OR?: Prisma.LichChieuScalarWhereInput[]
   NOT?: Prisma.LichChieuScalarWhereInput | Prisma.LichChieuScalarWhereInput[]
-  ma_lich_chiu?: Prisma.IntFilter<"LichChieu"> | number
+  ma_lich_chieu?: Prisma.IntFilter<"LichChieu"> | number
   ma_rap?: Prisma.IntNullableFilter<"LichChieu"> | number | null
   ma_phim?: Prisma.IntNullableFilter<"LichChieu"> | number | null
   ngay_gio_chieu?: Prisma.DateTimeNullableFilter<"LichChieu"> | Date | string | null
@@ -598,7 +598,7 @@ export type LichChieuCreateWithoutRapPhimInput = {
 }
 
 export type LichChieuUncheckedCreateWithoutRapPhimInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_phim?: number | null
   ngay_gio_chieu?: Date | string | null
   gia_ve?: number | null
@@ -632,7 +632,7 @@ export type LichChieuUpdateManyWithWhereWithoutRapPhimInput = {
 }
 
 export type LichChieuCreateManyPhimInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_rap?: number | null
   ngay_gio_chieu?: Date | string | null
   gia_ve?: number | null
@@ -646,7 +646,7 @@ export type LichChieuUpdateWithoutPhimInput = {
 }
 
 export type LichChieuUncheckedUpdateWithoutPhimInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gia_ve?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -654,14 +654,14 @@ export type LichChieuUncheckedUpdateWithoutPhimInput = {
 }
 
 export type LichChieuUncheckedUpdateManyWithoutPhimInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gia_ve?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LichChieuCreateManyRapPhimInput = {
-  ma_lich_chiu?: number
+  ma_lich_chieu?: number
   ma_phim?: number | null
   ngay_gio_chieu?: Date | string | null
   gia_ve?: number | null
@@ -675,7 +675,7 @@ export type LichChieuUpdateWithoutRapPhimInput = {
 }
 
 export type LichChieuUncheckedUpdateWithoutRapPhimInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_phim?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gia_ve?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -683,7 +683,7 @@ export type LichChieuUncheckedUpdateWithoutRapPhimInput = {
 }
 
 export type LichChieuUncheckedUpdateManyWithoutRapPhimInput = {
-  ma_lich_chiu?: Prisma.IntFieldUpdateOperationsInput | number
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
   ma_phim?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ngay_gio_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gia_ve?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -721,7 +721,7 @@ export type LichChieuCountOutputTypeCountDatVeArgs<ExtArgs extends runtime.Types
 
 
 export type LichChieuSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  ma_lich_chiu?: boolean
+  ma_lich_chieu?: boolean
   ma_rap?: boolean
   ma_phim?: boolean
   ngay_gio_chieu?: boolean
@@ -735,14 +735,14 @@ export type LichChieuSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 
 export type LichChieuSelectScalar = {
-  ma_lich_chiu?: boolean
+  ma_lich_chieu?: boolean
   ma_rap?: boolean
   ma_phim?: boolean
   ngay_gio_chieu?: boolean
   gia_ve?: boolean
 }
 
-export type LichChieuOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_lich_chiu" | "ma_rap" | "ma_phim" | "ngay_gio_chieu" | "gia_ve", ExtArgs["result"]["lichChieu"]>
+export type LichChieuOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_lich_chieu" | "ma_rap" | "ma_phim" | "ngay_gio_chieu" | "gia_ve", ExtArgs["result"]["lichChieu"]>
 export type LichChieuInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   DatVe?: boolean | Prisma.LichChieu$DatVeArgs<ExtArgs>
   RapPhim?: boolean | Prisma.LichChieu$RapPhimArgs<ExtArgs>
@@ -758,7 +758,7 @@ export type $LichChieuPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     Phim: Prisma.$PhimPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    ma_lich_chiu: number
+    ma_lich_chieu: number
     ma_rap: number | null
     ma_phim: number | null
     ngay_gio_chieu: Date | null
@@ -846,8 +846,8 @@ export interface LichChieuDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * // Get first 10 LichChieus
    * const lichChieus = await prisma.lichChieu.findMany({ take: 10 })
    * 
-   * // Only select the `ma_lich_chiu`
-   * const lichChieuWithMa_lich_chiuOnly = await prisma.lichChieu.findMany({ select: { ma_lich_chiu: true } })
+   * // Only select the `ma_lich_chieu`
+   * const lichChieuWithMa_lich_chieuOnly = await prisma.lichChieu.findMany({ select: { ma_lich_chieu: true } })
    * 
    */
   findMany<T extends LichChieuFindManyArgs>(args?: Prisma.SelectSubset<T, LichChieuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LichChieuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1135,7 +1135,7 @@ export interface Prisma__LichChieuClient<T, Null = never, ExtArgs extends runtim
  * Fields of the LichChieu model
  */
 export interface LichChieuFieldRefs {
-  readonly ma_lich_chiu: Prisma.FieldRef<"LichChieu", 'Int'>
+  readonly ma_lich_chieu: Prisma.FieldRef<"LichChieu", 'Int'>
   readonly ma_rap: Prisma.FieldRef<"LichChieu", 'Int'>
   readonly ma_phim: Prisma.FieldRef<"LichChieu", 'Int'>
   readonly ngay_gio_chieu: Prisma.FieldRef<"LichChieu", 'DateTime'>

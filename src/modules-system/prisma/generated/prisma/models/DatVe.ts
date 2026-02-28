@@ -27,61 +27,67 @@ export type AggregateDatVe = {
 }
 
 export type DatVeAvgAggregateOutputType = {
+  ma_dat_ve: number | null
   ma_lich_chieu: number | null
-  ma_ghe: number | null
 }
 
 export type DatVeSumAggregateOutputType = {
+  ma_dat_ve: number | null
   ma_lich_chieu: number | null
-  ma_ghe: number | null
 }
 
 export type DatVeMinAggregateOutputType = {
+  ma_dat_ve: number | null
   tai_khoan: string | null
   ma_lich_chieu: number | null
-  ma_ghe: number | null
+  ngay_dat: Date | null
 }
 
 export type DatVeMaxAggregateOutputType = {
+  ma_dat_ve: number | null
   tai_khoan: string | null
   ma_lich_chieu: number | null
-  ma_ghe: number | null
+  ngay_dat: Date | null
 }
 
 export type DatVeCountAggregateOutputType = {
+  ma_dat_ve: number
   tai_khoan: number
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat: number
   _all: number
 }
 
 
 export type DatVeAvgAggregateInputType = {
+  ma_dat_ve?: true
   ma_lich_chieu?: true
-  ma_ghe?: true
 }
 
 export type DatVeSumAggregateInputType = {
+  ma_dat_ve?: true
   ma_lich_chieu?: true
-  ma_ghe?: true
 }
 
 export type DatVeMinAggregateInputType = {
+  ma_dat_ve?: true
   tai_khoan?: true
   ma_lich_chieu?: true
-  ma_ghe?: true
+  ngay_dat?: true
 }
 
 export type DatVeMaxAggregateInputType = {
+  ma_dat_ve?: true
   tai_khoan?: true
   ma_lich_chieu?: true
-  ma_ghe?: true
+  ngay_dat?: true
 }
 
 export type DatVeCountAggregateInputType = {
+  ma_dat_ve?: true
   tai_khoan?: true
   ma_lich_chieu?: true
-  ma_ghe?: true
+  ngay_dat?: true
   _all?: true
 }
 
@@ -172,9 +178,10 @@ export type DatVeGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type DatVeGroupByOutputType = {
+  ma_dat_ve: number
   tai_khoan: string
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat: Date
   _count: DatVeCountAggregateOutputType | null
   _avg: DatVeAvgAggregateOutputType | null
   _sum: DatVeSumAggregateOutputType | null
@@ -201,41 +208,44 @@ export type DatVeWhereInput = {
   AND?: Prisma.DatVeWhereInput | Prisma.DatVeWhereInput[]
   OR?: Prisma.DatVeWhereInput[]
   NOT?: Prisma.DatVeWhereInput | Prisma.DatVeWhereInput[]
+  ma_dat_ve?: Prisma.IntFilter<"DatVe"> | number
   tai_khoan?: Prisma.StringFilter<"DatVe"> | string
   ma_lich_chieu?: Prisma.IntFilter<"DatVe"> | number
-  ma_ghe?: Prisma.IntFilter<"DatVe"> | number
+  ngay_dat?: Prisma.DateTimeFilter<"DatVe"> | Date | string
   NguoiDung?: Prisma.XOR<Prisma.NguoiDungScalarRelationFilter, Prisma.NguoiDungWhereInput>
   LichChieu?: Prisma.XOR<Prisma.LichChieuScalarRelationFilter, Prisma.LichChieuWhereInput>
-  Ghe?: Prisma.XOR<Prisma.GheScalarRelationFilter, Prisma.GheWhereInput>
+  ChiTietDatVe?: Prisma.ChiTietDatVeListRelationFilter
 }
 
 export type DatVeOrderByWithRelationInput = {
+  ma_dat_ve?: Prisma.SortOrder
   tai_khoan?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+  ngay_dat?: Prisma.SortOrder
   NguoiDung?: Prisma.NguoiDungOrderByWithRelationInput
   LichChieu?: Prisma.LichChieuOrderByWithRelationInput
-  Ghe?: Prisma.GheOrderByWithRelationInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeOrderByRelationAggregateInput
   _relevance?: Prisma.DatVeOrderByRelevanceInput
 }
 
 export type DatVeWhereUniqueInput = Prisma.AtLeast<{
-  tai_khoan_ma_lich_chieu_ma_ghe?: Prisma.DatVeTai_khoanMa_lich_chieuMa_gheCompoundUniqueInput
+  ma_dat_ve?: number
   AND?: Prisma.DatVeWhereInput | Prisma.DatVeWhereInput[]
   OR?: Prisma.DatVeWhereInput[]
   NOT?: Prisma.DatVeWhereInput | Prisma.DatVeWhereInput[]
   tai_khoan?: Prisma.StringFilter<"DatVe"> | string
   ma_lich_chieu?: Prisma.IntFilter<"DatVe"> | number
-  ma_ghe?: Prisma.IntFilter<"DatVe"> | number
+  ngay_dat?: Prisma.DateTimeFilter<"DatVe"> | Date | string
   NguoiDung?: Prisma.XOR<Prisma.NguoiDungScalarRelationFilter, Prisma.NguoiDungWhereInput>
   LichChieu?: Prisma.XOR<Prisma.LichChieuScalarRelationFilter, Prisma.LichChieuWhereInput>
-  Ghe?: Prisma.XOR<Prisma.GheScalarRelationFilter, Prisma.GheWhereInput>
-}, "tai_khoan_ma_lich_chieu_ma_ghe">
+  ChiTietDatVe?: Prisma.ChiTietDatVeListRelationFilter
+}, "ma_dat_ve">
 
 export type DatVeOrderByWithAggregationInput = {
+  ma_dat_ve?: Prisma.SortOrder
   tai_khoan?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+  ngay_dat?: Prisma.SortOrder
   _count?: Prisma.DatVeCountOrderByAggregateInput
   _avg?: Prisma.DatVeAvgOrderByAggregateInput
   _max?: Prisma.DatVeMaxOrderByAggregateInput
@@ -247,49 +257,58 @@ export type DatVeScalarWhereWithAggregatesInput = {
   AND?: Prisma.DatVeScalarWhereWithAggregatesInput | Prisma.DatVeScalarWhereWithAggregatesInput[]
   OR?: Prisma.DatVeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DatVeScalarWhereWithAggregatesInput | Prisma.DatVeScalarWhereWithAggregatesInput[]
+  ma_dat_ve?: Prisma.IntWithAggregatesFilter<"DatVe"> | number
   tai_khoan?: Prisma.StringWithAggregatesFilter<"DatVe"> | string
   ma_lich_chieu?: Prisma.IntWithAggregatesFilter<"DatVe"> | number
-  ma_ghe?: Prisma.IntWithAggregatesFilter<"DatVe"> | number
+  ngay_dat?: Prisma.DateTimeWithAggregatesFilter<"DatVe"> | Date | string
 }
 
 export type DatVeCreateInput = {
+  ngay_dat?: Date | string
   NguoiDung: Prisma.NguoiDungCreateNestedOneWithoutDatVeInput
   LichChieu: Prisma.LichChieuCreateNestedOneWithoutDatVeInput
-  Ghe: Prisma.GheCreateNestedOneWithoutDatVeInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeUncheckedCreateInput = {
+  ma_dat_ve?: number
   tai_khoan: string
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat?: Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeUpdateInput = {
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   NguoiDung?: Prisma.NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
   LichChieu?: Prisma.LichChieuUpdateOneRequiredWithoutDatVeNestedInput
-  Ghe?: Prisma.GheUpdateOneRequiredWithoutDatVeNestedInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeUncheckedUpdateInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
   ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeCreateManyInput = {
+  ma_dat_ve?: number
   tai_khoan: string
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat?: Date | string
 }
 
 export type DatVeUpdateManyMutationInput = {
-
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DatVeUncheckedUpdateManyInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
   ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DatVeOrderByRelevanceInput = {
@@ -298,38 +317,40 @@ export type DatVeOrderByRelevanceInput = {
   search: string
 }
 
-export type DatVeTai_khoanMa_lich_chieuMa_gheCompoundUniqueInput = {
-  tai_khoan: string
-  ma_lich_chieu: number
-  ma_ghe: number
-}
-
 export type DatVeCountOrderByAggregateInput = {
+  ma_dat_ve?: Prisma.SortOrder
   tai_khoan?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+  ngay_dat?: Prisma.SortOrder
 }
 
 export type DatVeAvgOrderByAggregateInput = {
+  ma_dat_ve?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
 }
 
 export type DatVeMaxOrderByAggregateInput = {
+  ma_dat_ve?: Prisma.SortOrder
   tai_khoan?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+  ngay_dat?: Prisma.SortOrder
 }
 
 export type DatVeMinOrderByAggregateInput = {
+  ma_dat_ve?: Prisma.SortOrder
   tai_khoan?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+  ngay_dat?: Prisma.SortOrder
 }
 
 export type DatVeSumOrderByAggregateInput = {
+  ma_dat_ve?: Prisma.SortOrder
   ma_lich_chieu?: Prisma.SortOrder
-  ma_ghe?: Prisma.SortOrder
+}
+
+export type DatVeScalarRelationFilter = {
+  is?: Prisma.DatVeWhereInput
+  isNot?: Prisma.DatVeWhereInput
 }
 
 export type DatVeListRelationFilter = {
@@ -342,50 +363,26 @@ export type DatVeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type DatVeCreateNestedManyWithoutGheInput = {
-  create?: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput> | Prisma.DatVeCreateWithoutGheInput[] | Prisma.DatVeUncheckedCreateWithoutGheInput[]
-  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutGheInput | Prisma.DatVeCreateOrConnectWithoutGheInput[]
-  createMany?: Prisma.DatVeCreateManyGheInputEnvelope
-  connect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
+export type DatVeCreateNestedOneWithoutChiTietDatVeInput = {
+  create?: Prisma.XOR<Prisma.DatVeCreateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedCreateWithoutChiTietDatVeInput>
+  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutChiTietDatVeInput
+  connect?: Prisma.DatVeWhereUniqueInput
 }
 
-export type DatVeUncheckedCreateNestedManyWithoutGheInput = {
-  create?: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput> | Prisma.DatVeCreateWithoutGheInput[] | Prisma.DatVeUncheckedCreateWithoutGheInput[]
-  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutGheInput | Prisma.DatVeCreateOrConnectWithoutGheInput[]
-  createMany?: Prisma.DatVeCreateManyGheInputEnvelope
-  connect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-}
-
-export type DatVeUpdateManyWithoutGheNestedInput = {
-  create?: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput> | Prisma.DatVeCreateWithoutGheInput[] | Prisma.DatVeUncheckedCreateWithoutGheInput[]
-  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutGheInput | Prisma.DatVeCreateOrConnectWithoutGheInput[]
-  upsert?: Prisma.DatVeUpsertWithWhereUniqueWithoutGheInput | Prisma.DatVeUpsertWithWhereUniqueWithoutGheInput[]
-  createMany?: Prisma.DatVeCreateManyGheInputEnvelope
-  set?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  disconnect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  delete?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  connect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  update?: Prisma.DatVeUpdateWithWhereUniqueWithoutGheInput | Prisma.DatVeUpdateWithWhereUniqueWithoutGheInput[]
-  updateMany?: Prisma.DatVeUpdateManyWithWhereWithoutGheInput | Prisma.DatVeUpdateManyWithWhereWithoutGheInput[]
-  deleteMany?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
-}
-
-export type DatVeUncheckedUpdateManyWithoutGheNestedInput = {
-  create?: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput> | Prisma.DatVeCreateWithoutGheInput[] | Prisma.DatVeUncheckedCreateWithoutGheInput[]
-  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutGheInput | Prisma.DatVeCreateOrConnectWithoutGheInput[]
-  upsert?: Prisma.DatVeUpsertWithWhereUniqueWithoutGheInput | Prisma.DatVeUpsertWithWhereUniqueWithoutGheInput[]
-  createMany?: Prisma.DatVeCreateManyGheInputEnvelope
-  set?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  disconnect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  delete?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  connect?: Prisma.DatVeWhereUniqueInput | Prisma.DatVeWhereUniqueInput[]
-  update?: Prisma.DatVeUpdateWithWhereUniqueWithoutGheInput | Prisma.DatVeUpdateWithWhereUniqueWithoutGheInput[]
-  updateMany?: Prisma.DatVeUpdateManyWithWhereWithoutGheInput | Prisma.DatVeUpdateManyWithWhereWithoutGheInput[]
-  deleteMany?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
+export type DatVeUpdateOneRequiredWithoutChiTietDatVeNestedInput = {
+  create?: Prisma.XOR<Prisma.DatVeCreateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedCreateWithoutChiTietDatVeInput>
+  connectOrCreate?: Prisma.DatVeCreateOrConnectWithoutChiTietDatVeInput
+  upsert?: Prisma.DatVeUpsertWithoutChiTietDatVeInput
+  connect?: Prisma.DatVeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DatVeUpdateToOneWithWhereWithoutChiTietDatVeInput, Prisma.DatVeUpdateWithoutChiTietDatVeInput>, Prisma.DatVeUncheckedUpdateWithoutChiTietDatVeInput>
 }
 
 export type DatVeCreateNestedManyWithoutLichChieuInput = {
@@ -472,59 +469,59 @@ export type DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput = {
   deleteMany?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
 }
 
-export type DatVeCreateWithoutGheInput = {
+export type DatVeCreateWithoutChiTietDatVeInput = {
+  ngay_dat?: Date | string
   NguoiDung: Prisma.NguoiDungCreateNestedOneWithoutDatVeInput
   LichChieu: Prisma.LichChieuCreateNestedOneWithoutDatVeInput
 }
 
-export type DatVeUncheckedCreateWithoutGheInput = {
+export type DatVeUncheckedCreateWithoutChiTietDatVeInput = {
+  ma_dat_ve?: number
   tai_khoan: string
   ma_lich_chieu: number
+  ngay_dat?: Date | string
 }
 
-export type DatVeCreateOrConnectWithoutGheInput = {
+export type DatVeCreateOrConnectWithoutChiTietDatVeInput = {
   where: Prisma.DatVeWhereUniqueInput
-  create: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput>
+  create: Prisma.XOR<Prisma.DatVeCreateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedCreateWithoutChiTietDatVeInput>
 }
 
-export type DatVeCreateManyGheInputEnvelope = {
-  data: Prisma.DatVeCreateManyGheInput | Prisma.DatVeCreateManyGheInput[]
-  skipDuplicates?: boolean
+export type DatVeUpsertWithoutChiTietDatVeInput = {
+  update: Prisma.XOR<Prisma.DatVeUpdateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedUpdateWithoutChiTietDatVeInput>
+  create: Prisma.XOR<Prisma.DatVeCreateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedCreateWithoutChiTietDatVeInput>
+  where?: Prisma.DatVeWhereInput
 }
 
-export type DatVeUpsertWithWhereUniqueWithoutGheInput = {
-  where: Prisma.DatVeWhereUniqueInput
-  update: Prisma.XOR<Prisma.DatVeUpdateWithoutGheInput, Prisma.DatVeUncheckedUpdateWithoutGheInput>
-  create: Prisma.XOR<Prisma.DatVeCreateWithoutGheInput, Prisma.DatVeUncheckedCreateWithoutGheInput>
+export type DatVeUpdateToOneWithWhereWithoutChiTietDatVeInput = {
+  where?: Prisma.DatVeWhereInput
+  data: Prisma.XOR<Prisma.DatVeUpdateWithoutChiTietDatVeInput, Prisma.DatVeUncheckedUpdateWithoutChiTietDatVeInput>
 }
 
-export type DatVeUpdateWithWhereUniqueWithoutGheInput = {
-  where: Prisma.DatVeWhereUniqueInput
-  data: Prisma.XOR<Prisma.DatVeUpdateWithoutGheInput, Prisma.DatVeUncheckedUpdateWithoutGheInput>
+export type DatVeUpdateWithoutChiTietDatVeInput = {
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  NguoiDung?: Prisma.NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
+  LichChieu?: Prisma.LichChieuUpdateOneRequiredWithoutDatVeNestedInput
 }
 
-export type DatVeUpdateManyWithWhereWithoutGheInput = {
-  where: Prisma.DatVeScalarWhereInput
-  data: Prisma.XOR<Prisma.DatVeUpdateManyMutationInput, Prisma.DatVeUncheckedUpdateManyWithoutGheInput>
-}
-
-export type DatVeScalarWhereInput = {
-  AND?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
-  OR?: Prisma.DatVeScalarWhereInput[]
-  NOT?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
-  tai_khoan?: Prisma.StringFilter<"DatVe"> | string
-  ma_lich_chieu?: Prisma.IntFilter<"DatVe"> | number
-  ma_ghe?: Prisma.IntFilter<"DatVe"> | number
+export type DatVeUncheckedUpdateWithoutChiTietDatVeInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
+  tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
+  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DatVeCreateWithoutLichChieuInput = {
+  ngay_dat?: Date | string
   NguoiDung: Prisma.NguoiDungCreateNestedOneWithoutDatVeInput
-  Ghe: Prisma.GheCreateNestedOneWithoutDatVeInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeUncheckedCreateWithoutLichChieuInput = {
+  ma_dat_ve?: number
   tai_khoan: string
-  ma_ghe: number
+  ngay_dat?: Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeCreateOrConnectWithoutLichChieuInput = {
@@ -553,14 +550,27 @@ export type DatVeUpdateManyWithWhereWithoutLichChieuInput = {
   data: Prisma.XOR<Prisma.DatVeUpdateManyMutationInput, Prisma.DatVeUncheckedUpdateManyWithoutLichChieuInput>
 }
 
+export type DatVeScalarWhereInput = {
+  AND?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
+  OR?: Prisma.DatVeScalarWhereInput[]
+  NOT?: Prisma.DatVeScalarWhereInput | Prisma.DatVeScalarWhereInput[]
+  ma_dat_ve?: Prisma.IntFilter<"DatVe"> | number
+  tai_khoan?: Prisma.StringFilter<"DatVe"> | string
+  ma_lich_chieu?: Prisma.IntFilter<"DatVe"> | number
+  ngay_dat?: Prisma.DateTimeFilter<"DatVe"> | Date | string
+}
+
 export type DatVeCreateWithoutNguoiDungInput = {
+  ngay_dat?: Date | string
   LichChieu: Prisma.LichChieuCreateNestedOneWithoutDatVeInput
-  Ghe: Prisma.GheCreateNestedOneWithoutDatVeInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeUncheckedCreateWithoutNguoiDungInput = {
+  ma_dat_ve?: number
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat?: Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedCreateNestedManyWithoutDatVeInput
 }
 
 export type DatVeCreateOrConnectWithoutNguoiDungInput = {
@@ -589,90 +599,113 @@ export type DatVeUpdateManyWithWhereWithoutNguoiDungInput = {
   data: Prisma.XOR<Prisma.DatVeUpdateManyMutationInput, Prisma.DatVeUncheckedUpdateManyWithoutNguoiDungInput>
 }
 
-export type DatVeCreateManyGheInput = {
-  tai_khoan: string
-  ma_lich_chieu: number
-}
-
-export type DatVeUpdateWithoutGheInput = {
-  NguoiDung?: Prisma.NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
-  LichChieu?: Prisma.LichChieuUpdateOneRequiredWithoutDatVeNestedInput
-}
-
-export type DatVeUncheckedUpdateWithoutGheInput = {
-  tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
-  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type DatVeUncheckedUpdateManyWithoutGheInput = {
-  tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
-  ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
 export type DatVeCreateManyLichChieuInput = {
+  ma_dat_ve?: number
   tai_khoan: string
-  ma_ghe: number
+  ngay_dat?: Date | string
 }
 
 export type DatVeUpdateWithoutLichChieuInput = {
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   NguoiDung?: Prisma.NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
-  Ghe?: Prisma.GheUpdateOneRequiredWithoutDatVeNestedInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeUncheckedUpdateWithoutLichChieuInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeUncheckedUpdateManyWithoutLichChieuInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   tai_khoan?: Prisma.StringFieldUpdateOperationsInput | string
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DatVeCreateManyNguoiDungInput = {
+  ma_dat_ve?: number
   ma_lich_chieu: number
-  ma_ghe: number
+  ngay_dat?: Date | string
 }
 
 export type DatVeUpdateWithoutNguoiDungInput = {
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   LichChieu?: Prisma.LichChieuUpdateOneRequiredWithoutDatVeNestedInput
-  Ghe?: Prisma.GheUpdateOneRequiredWithoutDatVeNestedInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeUncheckedUpdateWithoutNguoiDungInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedUpdateManyWithoutDatVeNestedInput
 }
 
 export type DatVeUncheckedUpdateManyWithoutNguoiDungInput = {
+  ma_dat_ve?: Prisma.IntFieldUpdateOperationsInput | number
   ma_lich_chieu?: Prisma.IntFieldUpdateOperationsInput | number
-  ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
+  ngay_dat?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
+/**
+ * Count Type DatVeCountOutputType
+ */
+
+export type DatVeCountOutputType = {
+  ChiTietDatVe: number
+}
+
+export type DatVeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ChiTietDatVe?: boolean | DatVeCountOutputTypeCountChiTietDatVeArgs
+}
+
+/**
+ * DatVeCountOutputType without action
+ */
+export type DatVeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DatVeCountOutputType
+   */
+  select?: Prisma.DatVeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DatVeCountOutputType without action
+ */
+export type DatVeCountOutputTypeCountChiTietDatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChiTietDatVeWhereInput
+}
+
 
 export type DatVeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  ma_dat_ve?: boolean
   tai_khoan?: boolean
   ma_lich_chieu?: boolean
-  ma_ghe?: boolean
+  ngay_dat?: boolean
   NguoiDung?: boolean | Prisma.NguoiDungDefaultArgs<ExtArgs>
   LichChieu?: boolean | Prisma.LichChieuDefaultArgs<ExtArgs>
-  Ghe?: boolean | Prisma.GheDefaultArgs<ExtArgs>
+  ChiTietDatVe?: boolean | Prisma.DatVe$ChiTietDatVeArgs<ExtArgs>
+  _count?: boolean | Prisma.DatVeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["datVe"]>
 
 
 
 export type DatVeSelectScalar = {
+  ma_dat_ve?: boolean
   tai_khoan?: boolean
   ma_lich_chieu?: boolean
-  ma_ghe?: boolean
+  ngay_dat?: boolean
 }
 
-export type DatVeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"tai_khoan" | "ma_lich_chieu" | "ma_ghe", ExtArgs["result"]["datVe"]>
+export type DatVeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_dat_ve" | "tai_khoan" | "ma_lich_chieu" | "ngay_dat", ExtArgs["result"]["datVe"]>
 export type DatVeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   NguoiDung?: boolean | Prisma.NguoiDungDefaultArgs<ExtArgs>
   LichChieu?: boolean | Prisma.LichChieuDefaultArgs<ExtArgs>
-  Ghe?: boolean | Prisma.GheDefaultArgs<ExtArgs>
+  ChiTietDatVe?: boolean | Prisma.DatVe$ChiTietDatVeArgs<ExtArgs>
+  _count?: boolean | Prisma.DatVeCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $DatVePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -680,12 +713,13 @@ export type $DatVePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     NguoiDung: Prisma.$NguoiDungPayload<ExtArgs>
     LichChieu: Prisma.$LichChieuPayload<ExtArgs>
-    Ghe: Prisma.$GhePayload<ExtArgs>
+    ChiTietDatVe: Prisma.$ChiTietDatVePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    ma_dat_ve: number
     tai_khoan: string
     ma_lich_chieu: number
-    ma_ghe: number
+    ngay_dat: Date
   }, ExtArgs["result"]["datVe"]>
   composites: {}
 }
@@ -769,8 +803,8 @@ export interface DatVeDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 DatVes
    * const datVes = await prisma.datVe.findMany({ take: 10 })
    * 
-   * // Only select the `tai_khoan`
-   * const datVeWithTai_khoanOnly = await prisma.datVe.findMany({ select: { tai_khoan: true } })
+   * // Only select the `ma_dat_ve`
+   * const datVeWithMa_dat_veOnly = await prisma.datVe.findMany({ select: { ma_dat_ve: true } })
    * 
    */
   findMany<T extends DatVeFindManyArgs>(args?: Prisma.SelectSubset<T, DatVeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1028,7 +1062,7 @@ export interface Prisma__DatVeClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   NguoiDung<T extends Prisma.NguoiDungDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NguoiDungDefaultArgs<ExtArgs>>): Prisma.Prisma__NguoiDungClient<runtime.Types.Result.GetResult<Prisma.$NguoiDungPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   LichChieu<T extends Prisma.LichChieuDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LichChieuDefaultArgs<ExtArgs>>): Prisma.Prisma__LichChieuClient<runtime.Types.Result.GetResult<Prisma.$LichChieuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Ghe<T extends Prisma.GheDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GheDefaultArgs<ExtArgs>>): Prisma.Prisma__GheClient<runtime.Types.Result.GetResult<Prisma.$GhePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ChiTietDatVe<T extends Prisma.DatVe$ChiTietDatVeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DatVe$ChiTietDatVeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChiTietDatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1058,9 +1092,10 @@ export interface Prisma__DatVeClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the DatVe model
  */
 export interface DatVeFieldRefs {
+  readonly ma_dat_ve: Prisma.FieldRef<"DatVe", 'Int'>
   readonly tai_khoan: Prisma.FieldRef<"DatVe", 'String'>
   readonly ma_lich_chieu: Prisma.FieldRef<"DatVe", 'Int'>
-  readonly ma_ghe: Prisma.FieldRef<"DatVe", 'Int'>
+  readonly ngay_dat: Prisma.FieldRef<"DatVe", 'DateTime'>
 }
     
 
@@ -1401,6 +1436,30 @@ export type DatVeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many DatVes to delete.
    */
   limit?: number
+}
+
+/**
+ * DatVe.ChiTietDatVe
+ */
+export type DatVe$ChiTietDatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChiTietDatVe
+   */
+  select?: Prisma.ChiTietDatVeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChiTietDatVe
+   */
+  omit?: Prisma.ChiTietDatVeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChiTietDatVeInclude<ExtArgs> | null
+  where?: Prisma.ChiTietDatVeWhereInput
+  orderBy?: Prisma.ChiTietDatVeOrderByWithRelationInput | Prisma.ChiTietDatVeOrderByWithRelationInput[]
+  cursor?: Prisma.ChiTietDatVeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChiTietDatVeScalarFieldEnum | Prisma.ChiTietDatVeScalarFieldEnum[]
 }
 
 /**

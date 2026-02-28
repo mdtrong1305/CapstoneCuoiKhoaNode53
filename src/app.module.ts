@@ -8,6 +8,8 @@ import { MoviesModule } from './modules-api/movies/movies.module';
 import { BannerModule } from './modules-api/banner/banner.module';
 import { SystemsModule } from './modules-api/systems/systems.module';
 import { ProtectGuard } from './common/guards/protect.guard';
+import { TicketModule } from './modules-api/ticket/ticket.module';
+import { SeatsModule } from './modules-api/seats/seats.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ProtectGuard } from './common/guards/protect.guard';
     MoviesModule,
     BannerModule,
     SystemsModule,
+    TicketModule,
+    SeatsModule,
   ],
   controllers: [],
   providers: [

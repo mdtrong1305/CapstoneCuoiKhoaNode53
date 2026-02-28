@@ -179,9 +179,9 @@ export type GheGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type GheGroupByOutputType = {
   ma_ghe: number
-  ten_ghe: string | null
-  loai_ghe: string | null
-  ma_rap: number | null
+  ten_ghe: string
+  loai_ghe: string
+  ma_rap: number
   _count: GheCountAggregateOutputType | null
   _avg: GheAvgAggregateOutputType | null
   _sum: GheSumAggregateOutputType | null
@@ -209,20 +209,20 @@ export type GheWhereInput = {
   OR?: Prisma.GheWhereInput[]
   NOT?: Prisma.GheWhereInput | Prisma.GheWhereInput[]
   ma_ghe?: Prisma.IntFilter<"Ghe"> | number
-  ten_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  loai_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  ma_rap?: Prisma.IntNullableFilter<"Ghe"> | number | null
-  DatVe?: Prisma.DatVeListRelationFilter
-  RapPhim?: Prisma.XOR<Prisma.RapPhimNullableScalarRelationFilter, Prisma.RapPhimWhereInput> | null
+  ten_ghe?: Prisma.StringFilter<"Ghe"> | string
+  loai_ghe?: Prisma.StringFilter<"Ghe"> | string
+  ma_rap?: Prisma.IntFilter<"Ghe"> | number
+  RapPhim?: Prisma.XOR<Prisma.RapPhimScalarRelationFilter, Prisma.RapPhimWhereInput>
+  ChiTietDatVe?: Prisma.ChiTietDatVeListRelationFilter
 }
 
 export type GheOrderByWithRelationInput = {
   ma_ghe?: Prisma.SortOrder
-  ten_ghe?: Prisma.SortOrderInput | Prisma.SortOrder
-  loai_ghe?: Prisma.SortOrderInput | Prisma.SortOrder
-  ma_rap?: Prisma.SortOrderInput | Prisma.SortOrder
-  DatVe?: Prisma.DatVeOrderByRelationAggregateInput
+  ten_ghe?: Prisma.SortOrder
+  loai_ghe?: Prisma.SortOrder
+  ma_rap?: Prisma.SortOrder
   RapPhim?: Prisma.RapPhimOrderByWithRelationInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeOrderByRelationAggregateInput
   _relevance?: Prisma.GheOrderByRelevanceInput
 }
 
@@ -231,18 +231,18 @@ export type GheWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.GheWhereInput | Prisma.GheWhereInput[]
   OR?: Prisma.GheWhereInput[]
   NOT?: Prisma.GheWhereInput | Prisma.GheWhereInput[]
-  ten_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  loai_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  ma_rap?: Prisma.IntNullableFilter<"Ghe"> | number | null
-  DatVe?: Prisma.DatVeListRelationFilter
-  RapPhim?: Prisma.XOR<Prisma.RapPhimNullableScalarRelationFilter, Prisma.RapPhimWhereInput> | null
+  ten_ghe?: Prisma.StringFilter<"Ghe"> | string
+  loai_ghe?: Prisma.StringFilter<"Ghe"> | string
+  ma_rap?: Prisma.IntFilter<"Ghe"> | number
+  RapPhim?: Prisma.XOR<Prisma.RapPhimScalarRelationFilter, Prisma.RapPhimWhereInput>
+  ChiTietDatVe?: Prisma.ChiTietDatVeListRelationFilter
 }, "ma_ghe">
 
 export type GheOrderByWithAggregationInput = {
   ma_ghe?: Prisma.SortOrder
-  ten_ghe?: Prisma.SortOrderInput | Prisma.SortOrder
-  loai_ghe?: Prisma.SortOrderInput | Prisma.SortOrder
-  ma_rap?: Prisma.SortOrderInput | Prisma.SortOrder
+  ten_ghe?: Prisma.SortOrder
+  loai_ghe?: Prisma.SortOrder
+  ma_rap?: Prisma.SortOrder
   _count?: Prisma.GheCountOrderByAggregateInput
   _avg?: Prisma.GheAvgOrderByAggregateInput
   _max?: Prisma.GheMaxOrderByAggregateInput
@@ -255,58 +255,58 @@ export type GheScalarWhereWithAggregatesInput = {
   OR?: Prisma.GheScalarWhereWithAggregatesInput[]
   NOT?: Prisma.GheScalarWhereWithAggregatesInput | Prisma.GheScalarWhereWithAggregatesInput[]
   ma_ghe?: Prisma.IntWithAggregatesFilter<"Ghe"> | number
-  ten_ghe?: Prisma.StringNullableWithAggregatesFilter<"Ghe"> | string | null
-  loai_ghe?: Prisma.StringNullableWithAggregatesFilter<"Ghe"> | string | null
-  ma_rap?: Prisma.IntNullableWithAggregatesFilter<"Ghe"> | number | null
+  ten_ghe?: Prisma.StringWithAggregatesFilter<"Ghe"> | string
+  loai_ghe?: Prisma.StringWithAggregatesFilter<"Ghe"> | string
+  ma_rap?: Prisma.IntWithAggregatesFilter<"Ghe"> | number
 }
 
 export type GheCreateInput = {
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  DatVe?: Prisma.DatVeCreateNestedManyWithoutGheInput
-  RapPhim?: Prisma.RapPhimCreateNestedOneWithoutGheInput
+  ten_ghe: string
+  loai_ghe: string
+  RapPhim: Prisma.RapPhimCreateNestedOneWithoutGheInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeCreateNestedManyWithoutGheInput
 }
 
 export type GheUncheckedCreateInput = {
   ma_ghe?: number
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  ma_rap?: number | null
-  DatVe?: Prisma.DatVeUncheckedCreateNestedManyWithoutGheInput
+  ten_ghe: string
+  loai_ghe: string
+  ma_rap: number
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedCreateNestedManyWithoutGheInput
 }
 
 export type GheUpdateInput = {
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  DatVe?: Prisma.DatVeUpdateManyWithoutGheNestedInput
-  RapPhim?: Prisma.RapPhimUpdateOneWithoutGheNestedInput
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  RapPhim?: Prisma.RapPhimUpdateOneRequiredWithoutGheNestedInput
+  ChiTietDatVe?: Prisma.ChiTietDatVeUpdateManyWithoutGheNestedInput
 }
 
 export type GheUncheckedUpdateInput = {
   ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  DatVe?: Prisma.DatVeUncheckedUpdateManyWithoutGheNestedInput
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  ma_rap?: Prisma.IntFieldUpdateOperationsInput | number
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedUpdateManyWithoutGheNestedInput
 }
 
 export type GheCreateManyInput = {
   ma_ghe?: number
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  ma_rap?: number | null
+  ten_ghe: string
+  loai_ghe: string
+  ma_rap: number
 }
 
 export type GheUpdateManyMutationInput = {
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GheUncheckedUpdateManyInput = {
   ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  ma_rap?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GheScalarRelationFilter = {
@@ -361,18 +361,18 @@ export type GheOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type GheCreateNestedOneWithoutDatVeInput = {
-  create?: Prisma.XOR<Prisma.GheCreateWithoutDatVeInput, Prisma.GheUncheckedCreateWithoutDatVeInput>
-  connectOrCreate?: Prisma.GheCreateOrConnectWithoutDatVeInput
+export type GheCreateNestedOneWithoutChiTietDatVeInput = {
+  create?: Prisma.XOR<Prisma.GheCreateWithoutChiTietDatVeInput, Prisma.GheUncheckedCreateWithoutChiTietDatVeInput>
+  connectOrCreate?: Prisma.GheCreateOrConnectWithoutChiTietDatVeInput
   connect?: Prisma.GheWhereUniqueInput
 }
 
-export type GheUpdateOneRequiredWithoutDatVeNestedInput = {
-  create?: Prisma.XOR<Prisma.GheCreateWithoutDatVeInput, Prisma.GheUncheckedCreateWithoutDatVeInput>
-  connectOrCreate?: Prisma.GheCreateOrConnectWithoutDatVeInput
-  upsert?: Prisma.GheUpsertWithoutDatVeInput
+export type GheUpdateOneRequiredWithoutChiTietDatVeNestedInput = {
+  create?: Prisma.XOR<Prisma.GheCreateWithoutChiTietDatVeInput, Prisma.GheUncheckedCreateWithoutChiTietDatVeInput>
+  connectOrCreate?: Prisma.GheCreateOrConnectWithoutChiTietDatVeInput
+  upsert?: Prisma.GheUpsertWithoutChiTietDatVeInput
   connect?: Prisma.GheWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GheUpdateToOneWithWhereWithoutDatVeInput, Prisma.GheUpdateWithoutDatVeInput>, Prisma.GheUncheckedUpdateWithoutDatVeInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GheUpdateToOneWithWhereWithoutChiTietDatVeInput, Prisma.GheUpdateWithoutChiTietDatVeInput>, Prisma.GheUncheckedUpdateWithoutChiTietDatVeInput>
 }
 
 export type GheCreateNestedManyWithoutRapPhimInput = {
@@ -417,59 +417,59 @@ export type GheUncheckedUpdateManyWithoutRapPhimNestedInput = {
   deleteMany?: Prisma.GheScalarWhereInput | Prisma.GheScalarWhereInput[]
 }
 
-export type GheCreateWithoutDatVeInput = {
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  RapPhim?: Prisma.RapPhimCreateNestedOneWithoutGheInput
+export type GheCreateWithoutChiTietDatVeInput = {
+  ten_ghe: string
+  loai_ghe: string
+  RapPhim: Prisma.RapPhimCreateNestedOneWithoutGheInput
 }
 
-export type GheUncheckedCreateWithoutDatVeInput = {
+export type GheUncheckedCreateWithoutChiTietDatVeInput = {
   ma_ghe?: number
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  ma_rap?: number | null
+  ten_ghe: string
+  loai_ghe: string
+  ma_rap: number
 }
 
-export type GheCreateOrConnectWithoutDatVeInput = {
+export type GheCreateOrConnectWithoutChiTietDatVeInput = {
   where: Prisma.GheWhereUniqueInput
-  create: Prisma.XOR<Prisma.GheCreateWithoutDatVeInput, Prisma.GheUncheckedCreateWithoutDatVeInput>
+  create: Prisma.XOR<Prisma.GheCreateWithoutChiTietDatVeInput, Prisma.GheUncheckedCreateWithoutChiTietDatVeInput>
 }
 
-export type GheUpsertWithoutDatVeInput = {
-  update: Prisma.XOR<Prisma.GheUpdateWithoutDatVeInput, Prisma.GheUncheckedUpdateWithoutDatVeInput>
-  create: Prisma.XOR<Prisma.GheCreateWithoutDatVeInput, Prisma.GheUncheckedCreateWithoutDatVeInput>
+export type GheUpsertWithoutChiTietDatVeInput = {
+  update: Prisma.XOR<Prisma.GheUpdateWithoutChiTietDatVeInput, Prisma.GheUncheckedUpdateWithoutChiTietDatVeInput>
+  create: Prisma.XOR<Prisma.GheCreateWithoutChiTietDatVeInput, Prisma.GheUncheckedCreateWithoutChiTietDatVeInput>
   where?: Prisma.GheWhereInput
 }
 
-export type GheUpdateToOneWithWhereWithoutDatVeInput = {
+export type GheUpdateToOneWithWhereWithoutChiTietDatVeInput = {
   where?: Prisma.GheWhereInput
-  data: Prisma.XOR<Prisma.GheUpdateWithoutDatVeInput, Prisma.GheUncheckedUpdateWithoutDatVeInput>
+  data: Prisma.XOR<Prisma.GheUpdateWithoutChiTietDatVeInput, Prisma.GheUncheckedUpdateWithoutChiTietDatVeInput>
 }
 
-export type GheUpdateWithoutDatVeInput = {
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  RapPhim?: Prisma.RapPhimUpdateOneWithoutGheNestedInput
+export type GheUpdateWithoutChiTietDatVeInput = {
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  RapPhim?: Prisma.RapPhimUpdateOneRequiredWithoutGheNestedInput
 }
 
-export type GheUncheckedUpdateWithoutDatVeInput = {
+export type GheUncheckedUpdateWithoutChiTietDatVeInput = {
   ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ma_rap?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  ma_rap?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GheCreateWithoutRapPhimInput = {
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  DatVe?: Prisma.DatVeCreateNestedManyWithoutGheInput
+  ten_ghe: string
+  loai_ghe: string
+  ChiTietDatVe?: Prisma.ChiTietDatVeCreateNestedManyWithoutGheInput
 }
 
 export type GheUncheckedCreateWithoutRapPhimInput = {
   ma_ghe?: number
-  ten_ghe?: string | null
-  loai_ghe?: string | null
-  DatVe?: Prisma.DatVeUncheckedCreateNestedManyWithoutGheInput
+  ten_ghe: string
+  loai_ghe: string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedCreateNestedManyWithoutGheInput
 }
 
 export type GheCreateOrConnectWithoutRapPhimInput = {
@@ -503,34 +503,34 @@ export type GheScalarWhereInput = {
   OR?: Prisma.GheScalarWhereInput[]
   NOT?: Prisma.GheScalarWhereInput | Prisma.GheScalarWhereInput[]
   ma_ghe?: Prisma.IntFilter<"Ghe"> | number
-  ten_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  loai_ghe?: Prisma.StringNullableFilter<"Ghe"> | string | null
-  ma_rap?: Prisma.IntNullableFilter<"Ghe"> | number | null
+  ten_ghe?: Prisma.StringFilter<"Ghe"> | string
+  loai_ghe?: Prisma.StringFilter<"Ghe"> | string
+  ma_rap?: Prisma.IntFilter<"Ghe"> | number
 }
 
 export type GheCreateManyRapPhimInput = {
   ma_ghe?: number
-  ten_ghe?: string | null
-  loai_ghe?: string | null
+  ten_ghe: string
+  loai_ghe: string
 }
 
 export type GheUpdateWithoutRapPhimInput = {
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  DatVe?: Prisma.DatVeUpdateManyWithoutGheNestedInput
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUpdateManyWithoutGheNestedInput
 }
 
 export type GheUncheckedUpdateWithoutRapPhimInput = {
   ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  DatVe?: Prisma.DatVeUncheckedUpdateManyWithoutGheNestedInput
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  ChiTietDatVe?: Prisma.ChiTietDatVeUncheckedUpdateManyWithoutGheNestedInput
 }
 
 export type GheUncheckedUpdateManyWithoutRapPhimInput = {
   ma_ghe?: Prisma.IntFieldUpdateOperationsInput | number
-  ten_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  loai_ghe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ten_ghe?: Prisma.StringFieldUpdateOperationsInput | string
+  loai_ghe?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -539,11 +539,11 @@ export type GheUncheckedUpdateManyWithoutRapPhimInput = {
  */
 
 export type GheCountOutputType = {
-  DatVe: number
+  ChiTietDatVe: number
 }
 
 export type GheCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  DatVe?: boolean | GheCountOutputTypeCountDatVeArgs
+  ChiTietDatVe?: boolean | GheCountOutputTypeCountChiTietDatVeArgs
 }
 
 /**
@@ -559,8 +559,8 @@ export type GheCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
 /**
  * GheCountOutputType without action
  */
-export type GheCountOutputTypeCountDatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DatVeWhereInput
+export type GheCountOutputTypeCountChiTietDatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChiTietDatVeWhereInput
 }
 
 
@@ -569,8 +569,8 @@ export type GheSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   ten_ghe?: boolean
   loai_ghe?: boolean
   ma_rap?: boolean
-  DatVe?: boolean | Prisma.Ghe$DatVeArgs<ExtArgs>
-  RapPhim?: boolean | Prisma.Ghe$RapPhimArgs<ExtArgs>
+  RapPhim?: boolean | Prisma.RapPhimDefaultArgs<ExtArgs>
+  ChiTietDatVe?: boolean | Prisma.Ghe$ChiTietDatVeArgs<ExtArgs>
   _count?: boolean | Prisma.GheCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ghe"]>
 
@@ -585,22 +585,22 @@ export type GheSelectScalar = {
 
 export type GheOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_ghe" | "ten_ghe" | "loai_ghe" | "ma_rap", ExtArgs["result"]["ghe"]>
 export type GheInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  DatVe?: boolean | Prisma.Ghe$DatVeArgs<ExtArgs>
-  RapPhim?: boolean | Prisma.Ghe$RapPhimArgs<ExtArgs>
+  RapPhim?: boolean | Prisma.RapPhimDefaultArgs<ExtArgs>
+  ChiTietDatVe?: boolean | Prisma.Ghe$ChiTietDatVeArgs<ExtArgs>
   _count?: boolean | Prisma.GheCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $GhePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ghe"
   objects: {
-    DatVe: Prisma.$DatVePayload<ExtArgs>[]
-    RapPhim: Prisma.$RapPhimPayload<ExtArgs> | null
+    RapPhim: Prisma.$RapPhimPayload<ExtArgs>
+    ChiTietDatVe: Prisma.$ChiTietDatVePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     ma_ghe: number
-    ten_ghe: string | null
-    loai_ghe: string | null
-    ma_rap: number | null
+    ten_ghe: string
+    loai_ghe: string
+    ma_rap: number
   }, ExtArgs["result"]["ghe"]>
   composites: {}
 }
@@ -941,8 +941,8 @@ readonly fields: GheFieldRefs;
  */
 export interface Prisma__GheClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  DatVe<T extends Prisma.Ghe$DatVeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ghe$DatVeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  RapPhim<T extends Prisma.Ghe$RapPhimArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ghe$RapPhimArgs<ExtArgs>>): Prisma.Prisma__RapPhimClient<runtime.Types.Result.GetResult<Prisma.$RapPhimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  RapPhim<T extends Prisma.RapPhimDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RapPhimDefaultArgs<ExtArgs>>): Prisma.Prisma__RapPhimClient<runtime.Types.Result.GetResult<Prisma.$RapPhimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ChiTietDatVe<T extends Prisma.Ghe$ChiTietDatVeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ghe$ChiTietDatVeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChiTietDatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1194,7 +1194,7 @@ export type GheCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   /**
    * The data needed to create a Ghe.
    */
-  data?: Prisma.XOR<Prisma.GheCreateInput, Prisma.GheUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.GheCreateInput, Prisma.GheUncheckedCreateInput>
 }
 
 /**
@@ -1319,46 +1319,27 @@ export type GheDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Ghe.DatVe
+ * Ghe.ChiTietDatVe
  */
-export type Ghe$DatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Ghe$ChiTietDatVeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the DatVe
+   * Select specific fields to fetch from the ChiTietDatVe
    */
-  select?: Prisma.DatVeSelect<ExtArgs> | null
+  select?: Prisma.ChiTietDatVeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the DatVe
+   * Omit specific fields from the ChiTietDatVe
    */
-  omit?: Prisma.DatVeOmit<ExtArgs> | null
+  omit?: Prisma.ChiTietDatVeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DatVeInclude<ExtArgs> | null
-  where?: Prisma.DatVeWhereInput
-  orderBy?: Prisma.DatVeOrderByWithRelationInput | Prisma.DatVeOrderByWithRelationInput[]
-  cursor?: Prisma.DatVeWhereUniqueInput
+  include?: Prisma.ChiTietDatVeInclude<ExtArgs> | null
+  where?: Prisma.ChiTietDatVeWhereInput
+  orderBy?: Prisma.ChiTietDatVeOrderByWithRelationInput | Prisma.ChiTietDatVeOrderByWithRelationInput[]
+  cursor?: Prisma.ChiTietDatVeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.DatVeScalarFieldEnum | Prisma.DatVeScalarFieldEnum[]
-}
-
-/**
- * Ghe.RapPhim
- */
-export type Ghe$RapPhimArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RapPhim
-   */
-  select?: Prisma.RapPhimSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RapPhim
-   */
-  omit?: Prisma.RapPhimOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RapPhimInclude<ExtArgs> | null
-  where?: Prisma.RapPhimWhereInput
+  distinct?: Prisma.ChiTietDatVeScalarFieldEnum | Prisma.ChiTietDatVeScalarFieldEnum[]
 }
 
 /**

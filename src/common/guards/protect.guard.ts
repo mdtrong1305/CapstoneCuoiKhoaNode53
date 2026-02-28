@@ -58,17 +58,23 @@ export class ProtectGuard implements CanActivate {
         context.getHandler(),
         context.getClass(),
       ]);
-
       if (requiredRole) {
         const userRole = userWithoutPassword.loai_nguoi_dung;
-        
         if (userRole !== requiredRole) {
           throw new ForbiddenException('Bạn không có quyền truy cập tài nguyên này');
         }
       }
     } catch (err){
-      // trả về lỗi token hết hạn hoặc token không hợp lệ
-      throw new UnauthorizedException("Token không hợp lệ hoặc đã hết hạn");
+      // trả về lỗi token ko đủ quyền hoặc token không hợp lệ
+      const error = err instanceof Error ? err : new Error(String(err));
+      switch (error.constructor) {
+        case ForbiddenException:
+          // token ko đủ quyền: 403 (FE gọi api refresh token để lấy token mới)
+          throw new ForbiddenException(error.message);
+        default:
+          // mọi lỗi còn lại của token: 401 (FE-logout)
+          throw new UnauthorizedException("Token không hợp lệ hoặc đã hết hạn");
+      }
     }
     return true;
   }

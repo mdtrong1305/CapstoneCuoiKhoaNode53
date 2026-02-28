@@ -11,6 +11,7 @@
 export type * from './models/Banner.js'
 export type * from './models/CumRap.js'
 export type * from './models/DatVe.js'
+export type * from './models/ChiTietDatVe.js'
 export type * from './models/Ghe.js'
 export type * from './models/HeThongRap.js'
 export type * from './models/LichChieu.js'

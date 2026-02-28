@@ -26,9 +26,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('Auth', 'Xác thực và đăng ký')
     .addTag('Quản lý người dùng', 'CRUD người dùng')
-    .addTag('Quản lý phim và lịch chiếu', 'CRUD phim và lịch chiếu')
-    .addTag('Quản lý banner', 'CRUD banner')
     .addTag('Quản lý hệ thống rạp, cụm rạp và rạp phim', 'CRUD hệ thống rạp, cụm rạp và rạp phim')
+    .addTag('Quản lý phim và lịch chiếu', 'CRUD phim và lịch chiếu')
+    .addTag('Quản lý ảnh banner', 'CRUD ảnh banner')
+    .addTag('Quản lý ghế theo lịch chiếu', 'CRUD ghế theo lịch chiếu')
+    .addTag('Quản lý đặt vé', 'Xem lịch sử đặt vé và chi tiết vé và order vé')
     .addBearerAuth(
       {
         type: 'http',

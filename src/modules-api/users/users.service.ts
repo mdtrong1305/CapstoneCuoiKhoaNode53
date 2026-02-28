@@ -3,6 +3,7 @@ import { CreateUserDto, UpdateProfileDto, UpdateUserByAdminDto } from './dto/use
 import { PrismaService } from '../../modules-system/prisma/prisma.service';
 import { buildQueryPrisma } from '../../common/helper/build-query-prisma.helper';
 import * as bcrypt from 'bcrypt';
+import { NguoiDung } from '../../modules-system/prisma/generated/prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -51,9 +52,9 @@ export class UsersService {
     };
   }
 
-  async getCurrentUser(user: any) {
+  async getCurrentUser(nguoiDung: NguoiDung) {
     // Loại bỏ mật khẩu nếu có
-    const { mat_khau, ...userWithoutPassword } = user;
+    const { mat_khau, ...userWithoutPassword } = nguoiDung;
     return userWithoutPassword;
   }
 

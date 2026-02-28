@@ -6,7 +6,13 @@ import {
 import { PrismaService } from '../../modules-system/prisma/prisma.service';
 import { buildQueryPrisma } from '../../common/helper/build-query-prisma.helper';
 import { deleteFile } from '../../common/helper/delete-file.helper';
-import { CreateMovieDto, CreateShowtimeDto, UpdateMovieDto, UpdateShowtimeDto } from './dto/movies.dto';
+import {
+  CreateMovieDto,
+  CreateShowtimeDto,
+  UpdateMovieDto,
+  UpdateShowtimeDto,
+} from './dto/movies.dto';
+import { checkShowtimeConflict } from '../../common/helper/check-time-showtime.helper';
 
 @Injectable()
 export class MoviesService {
@@ -28,8 +34,9 @@ export class MoviesService {
         mo_ta: true,
         ngay_khoi_chieu: true,
         danh_gia: true,
+        thoi_luong: true,
         hot: true,
-        dang_chieau: true,
+        dang_chieu: true,
         sap_chieu: true,
       },
     });
@@ -57,8 +64,9 @@ export class MoviesService {
       mo_ta: data.mo_ta,
       ngay_khoi_chieu: new Date(data.ngay_khoi_chieu),
       danh_gia: Number(data.danh_gia),
+      thoi_luong: Number(data.thoi_luong),
       hot: data.hot === 'true',
-      dang_chieau: data.dang_chieau === 'true',
+      dang_chieu: data.dang_chieu === 'true',
       sap_chieu: data.sap_chieu === 'true',
       hinh_anh: imagePath,
     };
@@ -75,7 +83,7 @@ export class MoviesService {
         ngay_khoi_chieu: true,
         danh_gia: true,
         hot: true,
-        dang_chieau: true,
+        dang_chieu: true,
         sap_chieu: true,
       },
     });
@@ -106,9 +114,10 @@ export class MoviesService {
     if (data.ngay_khoi_chieu)
       updateData.ngay_khoi_chieu = new Date(data.ngay_khoi_chieu);
     if (data.danh_gia) updateData.danh_gia = Number(data.danh_gia);
+    if (data.thoi_luong) updateData.thoi_luong = Number(data.thoi_luong);
     if (data.hot !== undefined) updateData.hot = data.hot === 'true';
-    if (data.dang_chieau !== undefined)
-      updateData.dang_chieau = data.dang_chieau === 'true';
+    if (data.dang_chieu !== undefined)
+      updateData.dang_chieu = data.dang_chieu === 'true';
     if (data.sap_chieu !== undefined)
       updateData.sap_chieu = data.sap_chieu === 'true';
 
@@ -134,7 +143,7 @@ export class MoviesService {
         ngay_khoi_chieu: true,
         danh_gia: true,
         hot: true,
-        dang_chieau: true,
+        dang_chieu: true,
         sap_chieu: true,
       },
     });
@@ -232,7 +241,7 @@ export class MoviesService {
       }
       // đẩy lịch chiếu vào mảng cuối cùng
       cumRapEntry.lich_chieu_phim.push({
-        ma_lich_chiu: lc.ma_lich_chiu,
+        ma_lich_chieu: lc.ma_lich_chieu,
         ma_rap: lc.ma_rap,
         ten_rap: rapPhim.ten_rap,
         ngay_gio_chieu: lc.ngay_gio_chieu,
@@ -248,163 +257,114 @@ export class MoviesService {
     };
   }
 
-  async getShowtimesByCinema(ma_rap: number) {
-    // Kiểm tra rạp có tồn tại không
-    const rapPhim = await this.prisma.rapPhim.findUnique({
-      where: { ma_rap },
-    });
-
-    if (!rapPhim) {
-      throw new NotFoundException('Không tìm thấy rạp');
-    }
-
-    const showtimes = await this.prisma.lichChieu.findMany({
-      where: { ma_rap },
-      orderBy: {
-        ngay_gio_chieu: 'asc',
-      },
+  async getShowtimesByCinemaComplex(ma_cum_rap: number) {
+    // tìm cụm rạp và lôi hết các rạp con + lịch chiếu của rạp đó ra
+    const cumRap = await this.prisma.cumRap.findUnique({
+      where: { ma_cum_rap },
       include: {
-        Phim: {
-          select: {
-            ma_phim: true,
-            ten_phim: true,
-            hinh_anh: true,
-            trailer: true,
-            mo_ta: true,
-            ngay_khoi_chieu: true,
-            danh_gia: true,
+        RapPhim: {
+          include: {
+            LichChieu: {
+              include: {
+                Phim: true, // Để lấy tên phim, hình ảnh...
+              },
+            },
           },
         },
       },
     });
 
-    const lichChieu = showtimes.map((item) => ({
-      ...item,
-      thong_tin_phim: item.Phim,
-      Phim: undefined,
-    }));
+    if (!cumRap) {
+      throw new NotFoundException('Không tìm thấy cụm rạp');
+    }
+
+    // gom tất cả lịch chiếu của các rạp con lại
+    const danh_sach_lich_chieu = cumRap.RapPhim.flatMap((rap) => {
+      return rap.LichChieu.map((lich) => {
+        const { Phim, ...restLichChieu } = lich;
+        return {
+          ...restLichChieu,
+          ten_rap: rap.ten_rap,
+          ma_rap: rap.ma_rap,
+          thong_tin_phim: Phim,
+        };
+      });
+    });
 
     return {
-      data: lichChieu,
-      total: lichChieu.length,
+      thong_tin_cum_rap: {
+        ma_cum_rap: cumRap.ma_cum_rap,
+        ten_cum_rap: cumRap.ten_cum_rap,
+        dia_chi: cumRap.dia_chi,
+      },
+      danh_sach_lich_chieu: danh_sach_lich_chieu,
     };
   }
 
-  async createShowtime(data: CreateShowtimeDto) {
-    const ma_rap = parseInt(data.ma_rap);
-    const ma_phim = parseInt(data.ma_phim);
-    const gia_ve = parseInt(data.gia_ve);
-    const ngay_gio_chieu = new Date(data.ngay_gio_chieu);
-
-    // kiểm tra rạp có tồn tại không
-    const rapPhim = await this.prisma.rapPhim.findUnique({ where: { ma_rap } });
-    if (!rapPhim) throw new NotFoundException('Không tìm thấy rạp');
-
-    // kiểm tra phim có tồn tại không
-    const phim = await this.prisma.phim.findUnique({ where: { ma_phim } });
-    if (!phim) throw new NotFoundException('Không tìm thấy phim');
-
-    // kiểm tra trùng: chỉ cần trùng rạp và ngày giờ chiếu, bất kể phim nào
-    const isDuplicate = await this.prisma.lichChieu.findFirst({
-      where: {
-        ma_rap,
-        ngay_gio_chieu,
-      },
+  async createShowtime(body: CreateShowtimeDto) {
+    const { ma_phim, ma_rap, ngay_gio_chieu, gia_ve } = body;
+    const ngayChieuDate = new Date(ngay_gio_chieu);
+    // kiểm tra nếu ngày giờ chiếu bé hơn ngày hiện tại thì không cho tạo
+    if (ngayChieuDate < new Date()) {
+      throw new BadRequestException('Ngày giờ chiếu phải lớn hơn hiện tại');
+    }
+    // Gọi hàm helper trực tiếp
+    await checkShowtimeConflict(this.prisma, {
+      ma_rap,
+      ngay_gio_chieu_moi: ngayChieuDate,
+      ma_phim_moi: ma_phim,
     });
 
-    if (isDuplicate) {
-      throw new BadRequestException(
-        'Lịch chiếu này đã tồn tại (Trùng rạp và thời gian, không được phép tạo mới)',
-      );
-    }
-
-    // tạo lịch chiếu mới
-    const showtime = await this.prisma.lichChieu.create({
-      data: {
-        ma_rap,
-        ma_phim,
-        ngay_gio_chieu,
-        gia_ve,
-      },
-      include: {
-        RapPhim: {
-          select: {
-            ma_rap: true,
-            ten_rap: true,
-            CumRap: { select: { ten_cum_rap: true, dia_chi: true } },
-          },
-        },
-        Phim: { select: { ma_phim: true, ten_phim: true, hinh_anh: true } },
-      },
+    return this.prisma.lichChieu.create({
+      data: { ma_phim, ma_rap, ngay_gio_chieu: ngayChieuDate, gia_ve },
     });
-
-    // Đổi tên trường Phim -> thong_tin_phim, RapPhim -> thong_tin_rap, CumRap -> thong_tin_cum
-    const { Phim, RapPhim, ...rest } = showtime;
-    let thong_tin_rap: any = RapPhim ? { ...RapPhim } : null;
-    if (thong_tin_rap && thong_tin_rap.CumRap) {
-      thong_tin_rap.thong_tin_cum = thong_tin_rap.CumRap;
-      delete thong_tin_rap.CumRap;
-    }
-    return {
-      ...rest,
-      thong_tin_rap,
-      thong_tin_phim: Phim,
-    };
   }
 
   async updateShowtime(data: UpdateShowtimeDto) {
-    const ma_lich_chiu = Number(data.ma_lich_chiu);
-
-    // kiểm tra lịch chiếu có tồn tại không
+    // lấy mã lịch chiếu (Lưu ý: Schema của cậu dùng ma_lich_chiu)
+    const ma_lich_chieu = data.ma_lich_chieu;
+    // kiểm tra nếu ngày giờ chiếu bé hơn ngày hiện tại thì không cho tạo
+    if (data.ngay_gio_chieu) {
+      const ngayChieuDate = new Date(data.ngay_gio_chieu);
+      if (ngayChieuDate < new Date()) {
+        throw new BadRequestException('Ngày giờ chiếu phải lớn hơn hiện tại');
+      }
+    }
+    // kiểm tra lịch chiếu hiện tại có tồn tại không
     const currentShowtime = await this.prisma.lichChieu.findUnique({
-      where: { ma_lich_chiu },
+      where: { ma_lich_chieu },
     });
 
     if (!currentShowtime) {
       throw new NotFoundException('Không tìm thấy lịch chiếu');
     }
 
-    // build update data (chỉ update các field có giá trị truyền vào)
+    // chuẩn bị dữ liệu cập nhật
     const updateData: any = {};
+    if (data.ma_rap) updateData.ma_rap = data.ma_rap;
+    if (data.ma_phim) updateData.ma_phim = data.ma_phim;
+    if (data.gia_ve) updateData.gia_ve = data.gia_ve;
+    if (data.ngay_gio_chieu)
+      updateData.ngay_gio_chieu = new Date(data.ngay_gio_chieu);
 
-    if (data.ma_rap) updateData.ma_rap = Number(data.ma_rap);
-    if (data.ma_phim) updateData.ma_phim = Number(data.ma_phim);
-    if (data.ngay_gio_chieu) updateData.ngay_gio_chieu = new Date(data.ngay_gio_chieu);
-    if (data.gia_ve) updateData.gia_ve = Number(data.gia_ve);
+    // xác định các giá trị cuối cùng (mới hoặc cũ) để kiểm tra xung đột
+    const finalMaRap = updateData.ma_rap || currentShowtime.ma_rap;
+    const finalMaPhim = updateData.ma_phim || currentShowtime.ma_phim;
+    const finalNgayChieu =
+      updateData.ngay_gio_chieu || new Date(currentShowtime.ngay_gio_chieu!);
 
-    // kiểm tra tính hợp lệ của Rạp và Phim nếu có thay đổi
-    if (updateData.ma_rap) {
-      const rap = await this.prisma.rapPhim.findUnique({ where: { ma_rap: updateData.ma_rap } });
-      if (!rap) throw new NotFoundException('Không tìm thấy rạp mới');
-    }
-
-    if (updateData.ma_phim) {
-      const phim = await this.prisma.phim.findUnique({ where: { ma_phim: updateData.ma_phim } });
-      if (!phim) throw new NotFoundException('Không tìm thấy phim mới');
-    }
-
-    // KIỂM TRA TRÙNG LỊCH (Trùng Phim, Rạp, Thời gian tại bản ghi khác)
-    // Lấy các giá trị mới hoặc giữ nguyên giá trị cũ để so sánh trùng lặp
-    const check_ma_rap = updateData.ma_rap || currentShowtime.ma_rap;
-    const check_ngay_gio = updateData.ngay_gio_chieu || currentShowtime.ngay_gio_chieu;
-
-    const isDuplicate = await this.prisma.lichChieu.findFirst({
-      where: {
-        ma_rap: check_ma_rap,
-        ngay_gio_chieu: check_ngay_gio,
-        NOT: {
-          ma_lich_chiu: ma_lich_chiu, // loại trừ chính nó
-        },
-      },
+    // GỌI HELPER: Kiểm tra trùng lịch và khoảng nghỉ 30 phút
+    // Truyền excludeShowtimeId để không tự check xung đột với chính bản ghi đang sửa
+    await checkShowtimeConflict(this.prisma, {
+      ma_rap: finalMaRap,
+      ngay_gio_chieu_moi: finalNgayChieu,
+      ma_phim_moi: finalMaPhim,
+      excludeShowtimeId: ma_lich_chieu,
     });
 
-    if (isDuplicate) {
-      throw new BadRequestException('Lịch chiếu này đã tồn tại (Trùng rạp và thời gian, không được phép cập nhật)');
-    }
-
-    // cập nhật lịch chiếu
+    // tiến hành cập nhật vào database
     const updatedShowtime = await this.prisma.lichChieu.update({
-      where: { ma_lich_chiu },
+      where: { ma_lich_chieu },
       data: updateData,
       include: {
         RapPhim: {
@@ -418,13 +378,15 @@ export class MoviesService {
       },
     });
 
-    // Đổi tên trường Phim -> thong_tin_phim, RapPhim -> thong_tin_rap, CumRap -> thong_tin_cum
+    // format lại dữ liệu trả về cho Frontend
     const { Phim, RapPhim, ...rest } = updatedShowtime;
     let thong_tin_rap: any = RapPhim ? { ...RapPhim } : null;
+
     if (thong_tin_rap && thong_tin_rap.CumRap) {
       thong_tin_rap.thong_tin_cum = thong_tin_rap.CumRap;
       delete thong_tin_rap.CumRap;
     }
+
     return {
       ...rest,
       thong_tin_rap,
@@ -432,10 +394,10 @@ export class MoviesService {
     };
   }
 
-  async deleteShowtime(ma_lich_chiu: number) {
+  async deleteShowtime(ma_lich_chieu: number) {
     // kiểm tra lịch chiếu tồn tại
     const showtime = await this.prisma.lichChieu.findUnique({
-      where: { ma_lich_chiu },
+      where: { ma_lich_chieu },
     });
 
     if (!showtime) {
@@ -444,7 +406,7 @@ export class MoviesService {
 
     // xóa lịch chiếu
     await this.prisma.lichChieu.delete({
-      where: { ma_lich_chiu },
+      where: { ma_lich_chieu },
     });
 
     return true;

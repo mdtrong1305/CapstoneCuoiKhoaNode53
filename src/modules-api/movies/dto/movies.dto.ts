@@ -28,6 +28,11 @@ export class CreateMovieDto {
   @IsString({ message: 'Đánh giá phải là chuỗi' })
   danh_gia!: string;
 
+  @ApiProperty({ example: '120', description: 'Thời lượng phim (phút)' })
+  @IsNotEmpty({ message: 'Thời lượng không được để trống' })
+  @IsString({ message: 'Thời lượng phải là chuỗi' })
+  thoi_luong!: string;
+  
   @ApiProperty({ example: 'true', description: 'Phim hot' })
   @IsNotEmpty({ message: 'Hot không được để trống' })
   @IsString({ message: 'Hot phải là chuỗi' })
@@ -36,7 +41,7 @@ export class CreateMovieDto {
   @ApiProperty({ example: 'true', description: 'Đang chiếu' })
   @IsNotEmpty({ message: 'Đang chiếu không được để trống' })
   @IsString({ message: 'Đang chiếu phải là chuỗi' })
-  dang_chieau!: string;
+  dang_chieu!: string;
 
   @ApiProperty({ example: 'false', description: 'Sắp chiếu' })
   @IsNotEmpty({ message: 'Sắp chiếu không được để trống' })
@@ -75,6 +80,11 @@ export class UpdateMovieDto {
   @IsString({ message: 'Đánh giá phải là chuỗi' })
   danh_gia?: string;
 
+  @ApiProperty({ example: '120', description: 'Thời lượng phim (phút)', required: false })
+  @IsOptional()
+  @IsString({ message: 'Thời lượng phải là chuỗi' })
+  thoi_luong?: string;
+
   @ApiProperty({ example: 'true', description: 'Phim hot', required: false })
   @IsOptional()
   @IsString({ message: 'Hot phải là chuỗi' })
@@ -83,7 +93,7 @@ export class UpdateMovieDto {
   @ApiProperty({ example: 'true', description: 'Đang chiếu', required: false })
   @IsOptional()
   @IsString({ message: 'Đang chiếu phải là chuỗi' })
-  dang_chieau?: string;
+  dang_chieu?: string;
 
   @ApiProperty({ example: 'false', description: 'Sắp chiếu', required: false })
   @IsOptional()
@@ -94,13 +104,13 @@ export class UpdateMovieDto {
 export class CreateShowtimeDto {
   @ApiProperty({ example: '1', description: 'Mã rạp' })
   @IsNotEmpty({ message: 'Mã rạp không được để trống' })
-  @IsString({ message: 'Mã rạp phải là chuỗi' })
-  ma_rap!: string;
+  @IsInt({ message: 'Mã rạp phải là số nguyên' })
+  ma_rap!: number;
 
   @ApiProperty({ example: '1', description: 'Mã phim' })
   @IsNotEmpty({ message: 'Mã phim không được để trống' })
-  @IsString({ message: 'Mã phim phải là chuỗi' })
-  ma_phim!: string;
+  @IsInt({ message: 'Mã phim phải là số nguyên' })
+  ma_phim!: number;
 
   @ApiProperty({ example: '2024-01-01T19:00:00', description: 'Ngày giờ chiếu (ISO 8601 format)' })
   @IsNotEmpty({ message: 'Ngày giờ chiếu không được để trống' })
@@ -109,25 +119,25 @@ export class CreateShowtimeDto {
 
   @ApiProperty({ example: '100000', description: 'Giá vé (VND)' })
   @IsNotEmpty({ message: 'Giá vé không được để trống' })
-  @IsString({ message: 'Giá vé phải là chuỗi' })
-  gia_ve!: string;
+  @IsInt({ message: 'Giá vé phải là số nguyên' })
+  gia_ve!: number;
 }
 
 export class UpdateShowtimeDto {
   @ApiProperty({ example: '1', description: 'Mã lịch chiếu' })
   @IsNotEmpty({ message: 'Mã lịch chiếu không được để trống' })
-  @IsString({ message: 'Mã lịch chiếu phải là chuỗi' })
-  ma_lich_chiu!: string;
+  @IsInt({ message: 'Mã lịch chiếu phải là số nguyên' })
+  ma_lich_chieu!: number;
 
   @ApiProperty({ example: '1', description: 'Mã rạp', required: false })
   @IsOptional()
-  @IsString({ message: 'Mã rạp phải là chuỗi' })
-  ma_rap?: string;
+  @IsInt({ message: 'Mã rạp phải là số nguyên' })
+  ma_rap?: number;
 
   @ApiProperty({ example: '1', description: 'Mã phim', required: false })
   @IsOptional()
-  @IsString({ message: 'Mã phim phải là chuỗi' })
-  ma_phim?: string;
+  @IsInt({ message: 'Mã phim phải là số nguyên' })
+  ma_phim?: number;
 
   @ApiProperty({ example: '2024-01-01T19:00:00', description: 'Ngày giờ chiếu (ISO 8601 format)', required: false })
   @IsOptional()
@@ -136,6 +146,6 @@ export class UpdateShowtimeDto {
 
   @ApiProperty({ example: '100000', description: 'Giá vé (VND)', required: false })
   @IsOptional()
-  @IsString({ message: 'Giá vé phải là chuỗi' })
-  gia_ve?: string;  
+  @IsInt({ message: 'Giá vé phải là số nguyên' })
+  gia_ve?: number;  
 }

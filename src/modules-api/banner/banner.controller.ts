@@ -5,23 +5,23 @@ import { Public } from '../../common/decorators/public.decorator';
 import { IsRole } from '../../common/decorators/role.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerBannersConfig } from '../../common/configs/multer.config';
-import { BannerDto, UploadBannerImageDto } from './dto/banner.dto';
+import { UploadBannerImageDto } from './dto/banner.dto';
 
-@ApiTags('Quản lý banner')
-@ApiExtraModels(BannerDto, UploadBannerImageDto)
+@ApiTags('Quản lý ảnh banner')
+@ApiExtraModels(UploadBannerImageDto)
 @Controller('banners')
 export class BannerController {
   constructor(private readonly bannerService: BannerService) {}
 
   @Get()
   @Public()
-  @ApiOperation({ summary: 'Lấy danh sách banner' })
-  @ApiResponse({ status: 200, description: 'Lấy danh sách thành công' })
+  @ApiOperation({ summary: 'Lấy danh sách ảnh banner' })
+  @ApiResponse({ status: 200, description: 'Lấy danh sách ảnh banner thành công' })
   findAll() {
     return this.bannerService.findAll();
   }
 
-  @Post('upload-image')
+  @Post('')
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('image', multerBannersConfig))
@@ -33,9 +33,9 @@ export class BannerController {
       required: ['ma_phim', 'image'],
       properties: {
         ma_phim: {
-          type: 'string',
+          type: 'number',
           description: 'Mã phim',
-          example: '1',
+          example: "1",
         },
         image: {
           type: 'string',
@@ -45,7 +45,7 @@ export class BannerController {
       },
     },
   })
-  @ApiResponse({ status: 200, description: 'Upload ảnh thành công' })
+  @ApiResponse({ status: 200, description: 'Upload ảnh banner thành công' })
   @ApiResponse({ status: 400, description: 'Chỉ chấp nhận file ảnh' })
   @ApiResponse({ status: 401, description: 'Chưa đăng nhập' })
   @ApiResponse({ status: 403, description: 'Không có quyền' })
@@ -65,14 +65,14 @@ export class BannerController {
     return this.bannerService.uploadImage(ma_phim, file.filename);
   }
 
-  @Delete('delete-banner/:ma_banner')
+  @Delete('/:ma_banner')
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
-  @ApiOperation({ summary: 'Xóa banner (Chỉ QUAN_TRI)' })
-  @ApiResponse({ status: 200, description: 'Xóa banner thành công' })
+  @ApiOperation({ summary: 'Xóa ảnh banner (Chỉ QUAN_TRI)' })
+  @ApiResponse({ status: 200, description: 'Xóa ảnh banner thành công' })
   @ApiResponse({ status: 401, description: 'Chưa đăng nhập' })
   @ApiResponse({ status: 403, description: 'Không có quyền' })
-  @ApiResponse({ status: 404, description: 'Không tìm thấy banner' })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy ảnh banner' })
   deleteBanner(@Param('ma_banner', ParseIntPipe) ma_banner: number) {
     return this.bannerService.deleteBanner(ma_banner);
   }

@@ -387,6 +387,7 @@ export const ModelName = {
   Banner: 'Banner',
   CumRap: 'CumRap',
   DatVe: 'DatVe',
+  ChiTietDatVe: 'ChiTietDatVe',
   Ghe: 'Ghe',
   HeThongRap: 'HeThongRap',
   LichChieu: 'LichChieu',
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "banner" | "cumRap" | "datVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim"
+    modelProps: "banner" | "cumRap" | "datVe" | "chiTietDatVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -607,6 +608,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DatVeCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DatVeCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChiTietDatVe: {
+      payload: Prisma.$ChiTietDatVePayload<ExtArgs>
+      fields: Prisma.ChiTietDatVeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChiTietDatVeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChiTietDatVeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        findFirst: {
+          args: Prisma.ChiTietDatVeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChiTietDatVeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        findMany: {
+          args: Prisma.ChiTietDatVeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>[]
+        }
+        create: {
+          args: Prisma.ChiTietDatVeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        createMany: {
+          args: Prisma.ChiTietDatVeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ChiTietDatVeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        update: {
+          args: Prisma.ChiTietDatVeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChiTietDatVeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChiTietDatVeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ChiTietDatVeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChiTietDatVePayload>
+        }
+        aggregate: {
+          args: Prisma.ChiTietDatVeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChiTietDatVe>
+        }
+        groupBy: {
+          args: Prisma.ChiTietDatVeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChiTietDatVeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChiTietDatVeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChiTietDatVeCountAggregateOutputType> | number
         }
       }
     }
@@ -1065,12 +1132,22 @@ export type CumRapScalarFieldEnum = (typeof CumRapScalarFieldEnum)[keyof typeof 
 
 
 export const DatVeScalarFieldEnum = {
+  ma_dat_ve: 'ma_dat_ve',
   tai_khoan: 'tai_khoan',
   ma_lich_chieu: 'ma_lich_chieu',
-  ma_ghe: 'ma_ghe'
+  ngay_dat: 'ngay_dat'
 } as const
 
 export type DatVeScalarFieldEnum = (typeof DatVeScalarFieldEnum)[keyof typeof DatVeScalarFieldEnum]
+
+
+export const ChiTietDatVeScalarFieldEnum = {
+  ma_chi_tiet: 'ma_chi_tiet',
+  ma_dat_ve: 'ma_dat_ve',
+  ma_ghe: 'ma_ghe'
+} as const
+
+export type ChiTietDatVeScalarFieldEnum = (typeof ChiTietDatVeScalarFieldEnum)[keyof typeof ChiTietDatVeScalarFieldEnum]
 
 
 export const GheScalarFieldEnum = {
@@ -1093,7 +1170,7 @@ export type HeThongRapScalarFieldEnum = (typeof HeThongRapScalarFieldEnum)[keyof
 
 
 export const LichChieuScalarFieldEnum = {
-  ma_lich_chiu: 'ma_lich_chiu',
+  ma_lich_chieu: 'ma_lich_chieu',
   ma_rap: 'ma_rap',
   ma_phim: 'ma_phim',
   ngay_gio_chieu: 'ngay_gio_chieu',
@@ -1123,8 +1200,9 @@ export const PhimScalarFieldEnum = {
   mo_ta: 'mo_ta',
   ngay_khoi_chieu: 'ngay_khoi_chieu',
   danh_gia: 'danh_gia',
+  thoi_luong: 'thoi_luong',
   hot: 'hot',
-  dang_chieau: 'dang_chieau',
+  dang_chieu: 'dang_chieu',
   sap_chieu: 'sap_chieu'
 } as const
 
@@ -1361,6 +1439,7 @@ export type GlobalOmitConfig = {
   banner?: Prisma.BannerOmit
   cumRap?: Prisma.CumRapOmit
   datVe?: Prisma.DatVeOmit
+  chiTietDatVe?: Prisma.ChiTietDatVeOmit
   ghe?: Prisma.GheOmit
   heThongRap?: Prisma.HeThongRapOmit
   lichChieu?: Prisma.LichChieuOmit

@@ -4,6 +4,7 @@ import { CreateUserDto, UpdateProfileDto, UpdateUserByAdminDto } from './dto/use
 import { IsRole } from '../../common/decorators/role.decorator';
 import { User } from '../../common/decorators/user.decorator';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import type { NguoiDung } from '../../modules-system/prisma/generated/prisma/client';
 
 @ApiTags('Quản lý người dùng')
 @Controller('users')
@@ -27,16 +28,16 @@ export class UsersController {
   @ApiOperation({ summary: 'Lấy thông tin tài khoản hiện tại' })
   @ApiResponse({ status: 200, description: 'Lấy thông tin thành công' })
   @ApiResponse({ status: 401, description: 'Chưa đăng nhập' })
-  getCurrentUser(@User() user: any) {
-    return this.usersService.getCurrentUser(user);
+  getCurrentUser(@User() nguoiDung: NguoiDung) {
+    return this.usersService.getCurrentUser(nguoiDung);
   }
 
   @Get('get-users')
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Lấy danh sách người dùng (Chỉ QUAN_TRI)' })
-  @ApiQuery({ name: 'page', required: true, type: Number })
-  @ApiQuery({ name: 'pageSize', required: true, type: Number })
+  @ApiQuery({ name: 'page', example: 1, required: true, type: Number })
+  @ApiQuery({ name: 'pageSize', example: 3, required: true, type: Number })
   @ApiQuery({ name: 'filters', required: false, type: String })
   @ApiResponse({ status: 200, description: 'Lấy danh sách thành công' })
   @ApiResponse({ status: 401, description: 'Chưa đăng nhập' })

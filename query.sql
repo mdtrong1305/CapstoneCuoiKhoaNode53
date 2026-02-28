@@ -3,13 +3,13 @@ VALUES
 ('admin', 'ÁT MIN', 'admin@admin.com', '0999999999', '$2b$10$glNP/nEhaMedu54aWANACeoA5kiC//5rqf.0G2XbV/bfHy2uswx8G', 'QUAN_TRI'),
 ('mdtrong1305', 'Mai Đức Trọng', 'mdtrong1305@gmail.com', '0123456789', '$2b$10$t8UFgNyWPpjk15X.NBSsRuTMVx3mjjKLtS3XdR6NuQXiD5Qk3yEl6', 'KHACH_HANG');
 
-INSERT INTO Phim (ten_phim, trailer, hinh_anh, mo_ta, ngay_khoi_chieu, danh_gia, hot, dang_chieau, sap_chieu) 
+INSERT INTO Phim (ten_phim, trailer, hinh_anh, mo_ta, ngay_khoi_chieu, danh_gia, thoi_luong, hot, dang_chieu, sap_chieu) 
 VALUES 
-('Lật Mặt 7: Một Điều Ước', 'https://youtube.com/', 'movies/1772176954460-lat-mat-7.jpg', 'Câu chuyện cảm động về tình gia đình của bà Hai và 5 người con.', '2024-04-26', 10, true, true, false),
-('Mai', 'https://youtube.com/', 'movies/1772176944264-mai_tranthanh.jpg', 'Phim tâm lý tình cảm của đạo diễn Trấn Thành.', '2024-02-10', 9, true, false, false),
-('Dune: Part Two', 'https://youtube.com/', 'movies/1772176935759-teaser_poster_dune_2_7.jpg', 'Hành trình của Paul Atreides trên hành tinh cát Arrakis.', '2024-03-01', 10, true, true, false),
-('Kung Fu Panda 4', 'https://youtube.com/', 'movies/1772176907587-470x700-kungfupanda4_23eYVYq.jpg', 'Gấu Po trở lại với vai trò là Thủ lĩnh tâm linh của Thung lũng Bình Yên.', '2024-03-08', 8, false, true, false),
-('Deadpool & Wolverine', 'https://youtube.com/', 'movies/1772176926504-470x700-deadpool.jpg', 'Màn kết hợp bùng nổ của hai siêu anh hùng lầy lội nhất vũ trụ Marvel.', '2024-07-26', 10, true, false, true);
+('Lật Mặt 7: Một Điều Ước', 'https://youtube.com/', 'movies/1772176954460-lat-mat-7.jpg', 'Câu chuyện cảm động về tình gia đình của bà Hai và 5 người con.', '2024-04-26', 10, 120, true, true, false),
+('Mai', 'https://youtube.com/', 'movies/1772176944264-mai_tranthanh.jpg', 'Phim tâm lý tình cảm của đạo diễn Trấn Thành.', '2024-02-10', 9, 110, true, false, false),
+('Dune: Part Two', 'https://youtube.com/', 'movies/1772176935759-teaser_poster_dune_2_7.jpg', 'Hành trình của Paul Atreides trên hành tinh cát Arrakis.', '2024-03-01', 10, 155, true, true, false),
+('Kung Fu Panda 4', 'https://youtube.com/', 'movies/1772176907587-470x700-kungfupanda4_23eYVYq.jpg', 'Gấu Po trở lại với vai trò là Thủ lĩnh tâm linh của Thung lũng Bình Yên.', '2024-03-08', 8, 95, false, true, false),
+('Deadpool & Wolverine', 'https://youtube.com/', 'movies/1772176926504-470x700-deadpool.jpg', 'Màn kết hợp bùng nổ của hai siêu anh hùng lầy lội nhất vũ trụ Marvel.', '2024-07-26', 10, 135, false, true, false);
 
 INSERT INTO Banner (ma_phim, hinh_anh) 
 VALUES 
@@ -140,3 +140,30 @@ INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (48, 4, '2026-03-01 09:00:00', 75000), (48, 5, '2026-03-02 14:00:00', 90000), (48, 1, '2026-03-03 19:00:00', 120000), (48, 2, '2026-03-01 22:00:00', 100000),
 (49, 3, '2026-03-01 09:00:00', 75000), (49, 4, '2026-03-02 14:00:00', 90000), (49, 5, '2026-03-03 19:00:00', 120000), (49, 1, '2026-03-01 22:00:00', 100000),
 (50, 2, '2026-03-01 09:00:00', 75000), (50, 3, '2026-03-02 14:00:00', 90000), (50, 4, '2026-03-03 19:00:00', 120000), (50, 5, '2026-03-01 22:00:00', 100000);
+
+-- Đoạn script này tạo 160 ghế cho mỗi rạp (tổng 800 ghế cho 5 rạp)
+-- Hàng E, F là ghế Vip, còn lại là ghế Thuong
+
+INSERT INTO Ghe (ten_ghe, loai_ghe, ma_rap)
+SELECT 
+    CONCAT(hang, so) AS ten_ghe,
+    CASE 
+        WHEN hang IN ('E', 'F') THEN 'Vip' 
+        ELSE 'Thuong' 
+    END AS loai_ghe,
+    r.ma_rap
+FROM (
+    SELECT 'A' AS hang UNION SELECT 'B' UNION SELECT 'C' UNION SELECT 'D' UNION 
+    SELECT 'E' UNION SELECT 'F' UNION SELECT 'G' UNION SELECT 'H' UNION 
+    SELECT 'I' UNION SELECT 'J'
+) AS hang_ghe
+CROSS JOIN (
+    SELECT 01 AS so UNION SELECT 02 UNION SELECT 03 UNION SELECT 04 UNION 
+    SELECT 05 UNION SELECT 06 UNION SELECT 07 UNION SELECT 08 UNION 
+    SELECT 09 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12 UNION 
+    SELECT 13 UNION SELECT 14 UNION SELECT 15 UNION SELECT 16
+) AS so_ghe
+CROSS JOIN (
+    SELECT ma_rap FROM RapPhim -- Lấy tất cả mã rạp hiện có
+) AS r
+ORDER BY r.ma_rap, hang, so;

@@ -29,11 +29,13 @@ export type AggregatePhim = {
 export type PhimAvgAggregateOutputType = {
   ma_phim: number | null
   danh_gia: number | null
+  thoi_luong: number | null
 }
 
 export type PhimSumAggregateOutputType = {
   ma_phim: number | null
   danh_gia: number | null
+  thoi_luong: number | null
 }
 
 export type PhimMinAggregateOutputType = {
@@ -44,8 +46,9 @@ export type PhimMinAggregateOutputType = {
   mo_ta: string | null
   ngay_khoi_chieu: Date | null
   danh_gia: number | null
+  thoi_luong: number | null
   hot: boolean | null
-  dang_chieau: boolean | null
+  dang_chieu: boolean | null
   sap_chieu: boolean | null
 }
 
@@ -57,8 +60,9 @@ export type PhimMaxAggregateOutputType = {
   mo_ta: string | null
   ngay_khoi_chieu: Date | null
   danh_gia: number | null
+  thoi_luong: number | null
   hot: boolean | null
-  dang_chieau: boolean | null
+  dang_chieu: boolean | null
   sap_chieu: boolean | null
 }
 
@@ -70,8 +74,9 @@ export type PhimCountAggregateOutputType = {
   mo_ta: number
   ngay_khoi_chieu: number
   danh_gia: number
+  thoi_luong: number
   hot: number
-  dang_chieau: number
+  dang_chieu: number
   sap_chieu: number
   _all: number
 }
@@ -80,11 +85,13 @@ export type PhimCountAggregateOutputType = {
 export type PhimAvgAggregateInputType = {
   ma_phim?: true
   danh_gia?: true
+  thoi_luong?: true
 }
 
 export type PhimSumAggregateInputType = {
   ma_phim?: true
   danh_gia?: true
+  thoi_luong?: true
 }
 
 export type PhimMinAggregateInputType = {
@@ -95,8 +102,9 @@ export type PhimMinAggregateInputType = {
   mo_ta?: true
   ngay_khoi_chieu?: true
   danh_gia?: true
+  thoi_luong?: true
   hot?: true
-  dang_chieau?: true
+  dang_chieu?: true
   sap_chieu?: true
 }
 
@@ -108,8 +116,9 @@ export type PhimMaxAggregateInputType = {
   mo_ta?: true
   ngay_khoi_chieu?: true
   danh_gia?: true
+  thoi_luong?: true
   hot?: true
-  dang_chieau?: true
+  dang_chieu?: true
   sap_chieu?: true
 }
 
@@ -121,8 +130,9 @@ export type PhimCountAggregateInputType = {
   mo_ta?: true
   ngay_khoi_chieu?: true
   danh_gia?: true
+  thoi_luong?: true
   hot?: true
-  dang_chieau?: true
+  dang_chieu?: true
   sap_chieu?: true
   _all?: true
 }
@@ -221,8 +231,9 @@ export type PhimGroupByOutputType = {
   mo_ta: string | null
   ngay_khoi_chieu: Date | null
   danh_gia: number | null
+  thoi_luong: number | null
   hot: boolean | null
-  dang_chieau: boolean | null
+  dang_chieu: boolean | null
   sap_chieu: boolean | null
   _count: PhimCountAggregateOutputType | null
   _avg: PhimAvgAggregateOutputType | null
@@ -257,8 +268,9 @@ export type PhimWhereInput = {
   mo_ta?: Prisma.StringNullableFilter<"Phim"> | string | null
   ngay_khoi_chieu?: Prisma.DateTimeNullableFilter<"Phim"> | Date | string | null
   danh_gia?: Prisma.IntNullableFilter<"Phim"> | number | null
+  thoi_luong?: Prisma.IntNullableFilter<"Phim"> | number | null
   hot?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
-  dang_chieau?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
+  dang_chieu?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
   sap_chieu?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
   Banner?: Prisma.BannerListRelationFilter
   LichChieu?: Prisma.LichChieuListRelationFilter
@@ -272,8 +284,9 @@ export type PhimOrderByWithRelationInput = {
   mo_ta?: Prisma.SortOrderInput | Prisma.SortOrder
   ngay_khoi_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   danh_gia?: Prisma.SortOrderInput | Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrderInput | Prisma.SortOrder
   hot?: Prisma.SortOrderInput | Prisma.SortOrder
-  dang_chieau?: Prisma.SortOrderInput | Prisma.SortOrder
+  dang_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   sap_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   Banner?: Prisma.BannerOrderByRelationAggregateInput
   LichChieu?: Prisma.LichChieuOrderByRelationAggregateInput
@@ -291,8 +304,9 @@ export type PhimWhereUniqueInput = Prisma.AtLeast<{
   mo_ta?: Prisma.StringNullableFilter<"Phim"> | string | null
   ngay_khoi_chieu?: Prisma.DateTimeNullableFilter<"Phim"> | Date | string | null
   danh_gia?: Prisma.IntNullableFilter<"Phim"> | number | null
+  thoi_luong?: Prisma.IntNullableFilter<"Phim"> | number | null
   hot?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
-  dang_chieau?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
+  dang_chieu?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
   sap_chieu?: Prisma.BoolNullableFilter<"Phim"> | boolean | null
   Banner?: Prisma.BannerListRelationFilter
   LichChieu?: Prisma.LichChieuListRelationFilter
@@ -306,8 +320,9 @@ export type PhimOrderByWithAggregationInput = {
   mo_ta?: Prisma.SortOrderInput | Prisma.SortOrder
   ngay_khoi_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   danh_gia?: Prisma.SortOrderInput | Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrderInput | Prisma.SortOrder
   hot?: Prisma.SortOrderInput | Prisma.SortOrder
-  dang_chieau?: Prisma.SortOrderInput | Prisma.SortOrder
+  dang_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   sap_chieu?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PhimCountOrderByAggregateInput
   _avg?: Prisma.PhimAvgOrderByAggregateInput
@@ -327,8 +342,9 @@ export type PhimScalarWhereWithAggregatesInput = {
   mo_ta?: Prisma.StringNullableWithAggregatesFilter<"Phim"> | string | null
   ngay_khoi_chieu?: Prisma.DateTimeNullableWithAggregatesFilter<"Phim"> | Date | string | null
   danh_gia?: Prisma.IntNullableWithAggregatesFilter<"Phim"> | number | null
+  thoi_luong?: Prisma.IntNullableWithAggregatesFilter<"Phim"> | number | null
   hot?: Prisma.BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
-  dang_chieau?: Prisma.BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
+  dang_chieu?: Prisma.BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
   sap_chieu?: Prisma.BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
 }
 
@@ -339,8 +355,9 @@ export type PhimCreateInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   Banner?: Prisma.BannerCreateNestedManyWithoutPhimInput
   LichChieu?: Prisma.LichChieuCreateNestedManyWithoutPhimInput
@@ -354,8 +371,9 @@ export type PhimUncheckedCreateInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   Banner?: Prisma.BannerUncheckedCreateNestedManyWithoutPhimInput
   LichChieu?: Prisma.LichChieuUncheckedCreateNestedManyWithoutPhimInput
@@ -368,8 +386,9 @@ export type PhimUpdateInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   Banner?: Prisma.BannerUpdateManyWithoutPhimNestedInput
   LichChieu?: Prisma.LichChieuUpdateManyWithoutPhimNestedInput
@@ -383,8 +402,9 @@ export type PhimUncheckedUpdateInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   Banner?: Prisma.BannerUncheckedUpdateManyWithoutPhimNestedInput
   LichChieu?: Prisma.LichChieuUncheckedUpdateManyWithoutPhimNestedInput
@@ -398,8 +418,9 @@ export type PhimCreateManyInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
 }
 
@@ -410,8 +431,9 @@ export type PhimUpdateManyMutationInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
@@ -423,8 +445,9 @@ export type PhimUncheckedUpdateManyInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
@@ -447,14 +470,16 @@ export type PhimCountOrderByAggregateInput = {
   mo_ta?: Prisma.SortOrder
   ngay_khoi_chieu?: Prisma.SortOrder
   danh_gia?: Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrder
   hot?: Prisma.SortOrder
-  dang_chieau?: Prisma.SortOrder
+  dang_chieu?: Prisma.SortOrder
   sap_chieu?: Prisma.SortOrder
 }
 
 export type PhimAvgOrderByAggregateInput = {
   ma_phim?: Prisma.SortOrder
   danh_gia?: Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrder
 }
 
 export type PhimMaxOrderByAggregateInput = {
@@ -465,8 +490,9 @@ export type PhimMaxOrderByAggregateInput = {
   mo_ta?: Prisma.SortOrder
   ngay_khoi_chieu?: Prisma.SortOrder
   danh_gia?: Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrder
   hot?: Prisma.SortOrder
-  dang_chieau?: Prisma.SortOrder
+  dang_chieu?: Prisma.SortOrder
   sap_chieu?: Prisma.SortOrder
 }
 
@@ -478,14 +504,16 @@ export type PhimMinOrderByAggregateInput = {
   mo_ta?: Prisma.SortOrder
   ngay_khoi_chieu?: Prisma.SortOrder
   danh_gia?: Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrder
   hot?: Prisma.SortOrder
-  dang_chieau?: Prisma.SortOrder
+  dang_chieu?: Prisma.SortOrder
   sap_chieu?: Prisma.SortOrder
 }
 
 export type PhimSumOrderByAggregateInput = {
   ma_phim?: Prisma.SortOrder
   danh_gia?: Prisma.SortOrder
+  thoi_luong?: Prisma.SortOrder
 }
 
 export type PhimCreateNestedOneWithoutBannerInput = {
@@ -531,8 +559,9 @@ export type PhimCreateWithoutBannerInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   LichChieu?: Prisma.LichChieuCreateNestedManyWithoutPhimInput
 }
@@ -545,8 +574,9 @@ export type PhimUncheckedCreateWithoutBannerInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   LichChieu?: Prisma.LichChieuUncheckedCreateNestedManyWithoutPhimInput
 }
@@ -574,8 +604,9 @@ export type PhimUpdateWithoutBannerInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   LichChieu?: Prisma.LichChieuUpdateManyWithoutPhimNestedInput
 }
@@ -588,8 +619,9 @@ export type PhimUncheckedUpdateWithoutBannerInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   LichChieu?: Prisma.LichChieuUncheckedUpdateManyWithoutPhimNestedInput
 }
@@ -601,8 +633,9 @@ export type PhimCreateWithoutLichChieuInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   Banner?: Prisma.BannerCreateNestedManyWithoutPhimInput
 }
@@ -615,8 +648,9 @@ export type PhimUncheckedCreateWithoutLichChieuInput = {
   mo_ta?: string | null
   ngay_khoi_chieu?: Date | string | null
   danh_gia?: number | null
+  thoi_luong?: number | null
   hot?: boolean | null
-  dang_chieau?: boolean | null
+  dang_chieu?: boolean | null
   sap_chieu?: boolean | null
   Banner?: Prisma.BannerUncheckedCreateNestedManyWithoutPhimInput
 }
@@ -644,8 +678,9 @@ export type PhimUpdateWithoutLichChieuInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   Banner?: Prisma.BannerUpdateManyWithoutPhimNestedInput
 }
@@ -658,8 +693,9 @@ export type PhimUncheckedUpdateWithoutLichChieuInput = {
   mo_ta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ngay_khoi_chieu?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   danh_gia?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thoi_luong?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hot?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dang_chieau?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dang_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   sap_chieu?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   Banner?: Prisma.BannerUncheckedUpdateManyWithoutPhimNestedInput
 }
@@ -712,8 +748,9 @@ export type PhimSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   mo_ta?: boolean
   ngay_khoi_chieu?: boolean
   danh_gia?: boolean
+  thoi_luong?: boolean
   hot?: boolean
-  dang_chieau?: boolean
+  dang_chieu?: boolean
   sap_chieu?: boolean
   Banner?: boolean | Prisma.Phim$BannerArgs<ExtArgs>
   LichChieu?: boolean | Prisma.Phim$LichChieuArgs<ExtArgs>
@@ -730,12 +767,13 @@ export type PhimSelectScalar = {
   mo_ta?: boolean
   ngay_khoi_chieu?: boolean
   danh_gia?: boolean
+  thoi_luong?: boolean
   hot?: boolean
-  dang_chieau?: boolean
+  dang_chieu?: boolean
   sap_chieu?: boolean
 }
 
-export type PhimOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_phim" | "ten_phim" | "trailer" | "hinh_anh" | "mo_ta" | "ngay_khoi_chieu" | "danh_gia" | "hot" | "dang_chieau" | "sap_chieu", ExtArgs["result"]["phim"]>
+export type PhimOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ma_phim" | "ten_phim" | "trailer" | "hinh_anh" | "mo_ta" | "ngay_khoi_chieu" | "danh_gia" | "thoi_luong" | "hot" | "dang_chieu" | "sap_chieu", ExtArgs["result"]["phim"]>
 export type PhimInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Banner?: boolean | Prisma.Phim$BannerArgs<ExtArgs>
   LichChieu?: boolean | Prisma.Phim$LichChieuArgs<ExtArgs>
@@ -756,8 +794,9 @@ export type $PhimPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     mo_ta: string | null
     ngay_khoi_chieu: Date | null
     danh_gia: number | null
+    thoi_luong: number | null
     hot: boolean | null
-    dang_chieau: boolean | null
+    dang_chieu: boolean | null
     sap_chieu: boolean | null
   }, ExtArgs["result"]["phim"]>
   composites: {}
@@ -1137,8 +1176,9 @@ export interface PhimFieldRefs {
   readonly mo_ta: Prisma.FieldRef<"Phim", 'String'>
   readonly ngay_khoi_chieu: Prisma.FieldRef<"Phim", 'DateTime'>
   readonly danh_gia: Prisma.FieldRef<"Phim", 'Int'>
+  readonly thoi_luong: Prisma.FieldRef<"Phim", 'Int'>
   readonly hot: Prisma.FieldRef<"Phim", 'Boolean'>
-  readonly dang_chieau: Prisma.FieldRef<"Phim", 'Boolean'>
+  readonly dang_chieu: Prisma.FieldRef<"Phim", 'Boolean'>
   readonly sap_chieu: Prisma.FieldRef<"Phim", 'Boolean'>
 }
     

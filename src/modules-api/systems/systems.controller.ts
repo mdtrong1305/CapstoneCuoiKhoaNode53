@@ -7,8 +7,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { multerHeThongRapConfig } from '../../common/configs/multer.config';
 import { 
   CreateHeThongRapDto, 
-  UpdateHeThongRapDto, 
-  HeThongRapDto,
+  UpdateHeThongRapDto,
   CreateCumRap,
   UpdateCumRap,
   CreateRapPhim,
@@ -16,7 +15,7 @@ import {
 } from './dto/systems.dto';
 
 @ApiTags('Quản lý hệ thống rạp, cụm rạp và rạp phim')
-@ApiExtraModels(HeThongRapDto, CreateHeThongRapDto, UpdateHeThongRapDto, CreateCumRap, UpdateCumRap, CreateRapPhim, UpdateRapPhim)
+@ApiExtraModels(CreateHeThongRapDto, UpdateHeThongRapDto, CreateCumRap, UpdateCumRap, CreateRapPhim, UpdateRapPhim)
 @Controller('systems')
 export class SystemsController {
   constructor(private readonly systemsService: SystemsService) {}

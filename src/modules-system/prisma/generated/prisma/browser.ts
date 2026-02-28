@@ -33,6 +33,11 @@ export type CumRap = Prisma.CumRapModel
  */
 export type DatVe = Prisma.DatVeModel
 /**
+ * Model ChiTietDatVe
+ * 
+ */
+export type ChiTietDatVe = Prisma.ChiTietDatVeModel
+/**
  * Model Ghe
  * 
  */

@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, ParseFilePipe, MaxFileSizeValidator, Optional, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, ParseFilePipe, MaxFileSizeValidator, Param, ParseIntPipe } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -33,15 +33,16 @@ export class MoviesController {
   @ApiBody({
     schema: {
       type: 'object',
-      required: ['ten_phim', 'trailer', 'mo_ta', 'ngay_khoi_chieu', 'danh_gia', 'hot', 'dang_chieau', 'sap_chieu', 'image'],
+      required: ['ten_phim', 'trailer', 'mo_ta', 'ngay_khoi_chieu', 'danh_gia', 'thoi_luong', 'hot', 'dang_chieu', 'sap_chieu', 'image'],
       properties: {
         ten_phim: { type: 'string', description: 'Tên phim', example: 'Avatar 2' },
         trailer: { type: 'string', description: 'Link trailer', example: 'https://youtube.com/...' },
         mo_ta: { type: 'string', description: 'Mô tả phim', example: 'Mô tả phim...' },
         ngay_khoi_chieu: { type: 'string', description: 'Ngày khởi chiếu (YYYY-MM-DD)', example: '2024-01-01' },
-        danh_gia: { type: 'string', description: 'Đánh giá (0-10)', example: '8' },
+        danh_gia: { type: 'number', description: 'Đánh giá (0-10)', example: 8 },
+        thoi_luong: { type: 'number', description: 'Thời lượng phim (phút)', example: 120 },
         hot: { type: 'string', description: 'Phim hot (true/false)', example: 'true' },
-        dang_chieau: { type: 'string', description: 'Đang chiếu (true/false)', example: 'true' },
+        dang_chieu: { type: 'string', description: 'Đang chiếu (true/false)', example: 'true' },
         sap_chieu: { type: 'string', description: 'Sắp chiếu (true/false)', example: 'false' },
         image: { type: 'string', format: 'binary', description: 'File ảnh' },
       },
@@ -81,9 +82,10 @@ export class MoviesController {
         trailer: { type: 'string', description: 'Link trailer', example: 'https://youtube.com/...' },
         mo_ta: { type: 'string', description: 'Mô tả phim', example: 'Mô tả phim...' },
         ngay_khoi_chieu: { type: 'string', description: 'Ngày khởi chiếu (YYYY-MM-DD)', example: '2024-01-01' },
-        danh_gia: { type: 'string', description: 'Đánh giá (0-10)', example: '8' },
+        danh_gia: { type: 'number', description: 'Đánh giá (0-10)', example: 8 },
+        thoi_luong: { type: 'number', description: 'Thời lượng phim (phút)', example: 120 },
         hot: { type: 'string', description: 'Phim hot (true/false)', example: 'true' },
-        dang_chieau: { type: 'string', description: 'Đang chiếu (true/false)', example: 'true' },
+        dang_chieu: { type: 'string', description: 'Đang chiếu (true/false)', example: 'true' },
         sap_chieu: { type: 'string', description: 'Sắp chiếu (true/false)', example: 'false' },
         image: { type: 'string', format: 'binary', description: 'File ảnh (optional)' },
       },
@@ -130,13 +132,13 @@ export class MoviesController {
     return this.moviesService.getShowtimesByMovie(ma_phim);
   }
 
-  @Get('showtimes-by-cinema/:ma_rap')
+  @Get('showtimes-by-cinema/:ma_cum_rap')
   @Public()
-  @ApiOperation({ summary: 'Lấy lịch chiếu theo rạp' })
+  @ApiOperation({ summary: 'Lấy lịch chiếu theo cụm rạp' })
   @ApiResponse({ status: 200, description: 'Lấy danh sách thành công' })
-  @ApiResponse({ status: 404, description: 'Không tìm thấy rạp' })
-  getShowtimesByCinema(@Param('ma_rap', ParseIntPipe) ma_rap: number) {
-    return this.moviesService.getShowtimesByCinema(ma_rap);
+  @ApiResponse({ status: 404, description: 'Không tìm thấy cụm rạp' })
+  getShowtimesByCinemaComplex(@Param('ma_cum_rap', ParseIntPipe) ma_cum_rap: number) {
+    return this.moviesService.getShowtimesByCinemaComplex(ma_cum_rap);
   }
 
   @Post('create-showtime')
@@ -162,13 +164,13 @@ export class MoviesController {
     return this.moviesService.updateShowtime(body);
   }
 
-  @Delete('delete-showtime/:ma_lich_chiu')
+  @Delete('delete-showtime/:ma_lich_chieu')
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa lịch chiếu (Chỉ QUAN_TRI)' })
   @ApiResponse({ status: 200, description: 'Xóa lịch chiếu thành công' })
   @ApiResponse({ status: 404, description: 'Không tìm thấy lịch chiếu' })
-  deleteShowtime(@Param('ma_lich_chiu', ParseIntPipe) ma_lich_chiu: number) {
-    return this.moviesService.deleteShowtime(ma_lich_chiu);
+  deleteShowtime(@Param('ma_lich_chieu', ParseIntPipe) ma_lich_chieu: number) {
+    return this.moviesService.deleteShowtime(ma_lich_chieu);
   }
 }

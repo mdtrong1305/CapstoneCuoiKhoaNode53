@@ -307,6 +307,11 @@ export type RapPhimOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type RapPhimScalarRelationFilter = {
+  is?: Prisma.RapPhimWhereInput
+  isNot?: Prisma.RapPhimWhereInput
+}
+
 export type RapPhimNullableScalarRelationFilter = {
   is?: Prisma.RapPhimWhereInput | null
   isNot?: Prisma.RapPhimWhereInput | null
@@ -394,12 +399,10 @@ export type RapPhimCreateNestedOneWithoutGheInput = {
   connect?: Prisma.RapPhimWhereUniqueInput
 }
 
-export type RapPhimUpdateOneWithoutGheNestedInput = {
+export type RapPhimUpdateOneRequiredWithoutGheNestedInput = {
   create?: Prisma.XOR<Prisma.RapPhimCreateWithoutGheInput, Prisma.RapPhimUncheckedCreateWithoutGheInput>
   connectOrCreate?: Prisma.RapPhimCreateOrConnectWithoutGheInput
   upsert?: Prisma.RapPhimUpsertWithoutGheInput
-  disconnect?: Prisma.RapPhimWhereInput | boolean
-  delete?: Prisma.RapPhimWhereInput | boolean
   connect?: Prisma.RapPhimWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.RapPhimUpdateToOneWithWhereWithoutGheInput, Prisma.RapPhimUpdateWithoutGheInput>, Prisma.RapPhimUncheckedUpdateWithoutGheInput>
 }
