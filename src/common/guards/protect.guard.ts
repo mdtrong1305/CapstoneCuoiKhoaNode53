@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("Vui lòng cung cấp token");
     }
     try {
       const payload = await this.tokenService.verifyAccessToken(token);
@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
         },
       });
       if (!userExits) {
-        throw new UnauthorizedException("Không tìm thấy user");
+        throw new UnauthorizedException();
       }
       // Loại bỏ mật khẩu trước khi gán vào request
       const { mat_khau, ...userWithoutPassword } = userExits;
