@@ -59,7 +59,7 @@ export class UpdateProfileDto {
 }
 
 export class UpdateUserByAdminDto {
-  @ApiProperty({ example: 'user01', description: 'Tài khoản người dùng' })
+  @ApiProperty({ example: 'mdtrong1305', description: 'Tài khoản người dùng' })
   @IsNotEmpty({ message: 'Tài khoản không được để trống' })
   @IsString({ message: 'Tài khoản phải là chuỗi' })
   tai_khoan!: string;
