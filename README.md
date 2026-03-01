@@ -740,10 +740,6 @@ Lịch chiếu C: 21:00 ❌ (Trùng với thời gian nghỉ)
 - ✅ Ghế phải thuộc một rạp cụ thể
 - ✅ Tên ghế và loại ghế (Thuong/Vip) phải hợp lệ
 
-#### 4.2. Xóa ghế
-- ❌ Không thể xóa ghế đã từng được đặt vé (có foreign key constraint)
-- ℹ️ Database sẽ từ chối xóa nếu vi phạm ràng buộc
-
 ### 5. Upload file
 
 #### 5.1. Validate file type
