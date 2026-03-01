@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, ParseFilePipe, MaxFileSizeValidator, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { BannerService } from './banner.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -54,14 +54,7 @@ export class BannerController {
   @ApiResponse({ status: 404, description: 'Không tìm thấy banner' })
   uploadImage(
     @Body() body: UploadBannerImageDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
-        ],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File,
   ) {
     const ma_phim = Number(body.ma_phim);
     return this.bannerService.uploadImage(ma_phim, file.filename);

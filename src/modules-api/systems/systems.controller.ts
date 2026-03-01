@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, UseInterceptors, UploadedFile, UseGuards } from '@nestjs/common';
 import { SystemsService } from './systems.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -52,14 +52,7 @@ export class SystemsController {
   @ApiResponse({ status: 403, description: 'Không có quyền' })
   createHeThongRap(
     @Body() body: CreateHeThongRapDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
-        ],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File,
   ) {
     return this.systemsService.createHeThongRap(body, file.filename);
   }
@@ -78,7 +71,7 @@ export class SystemsController {
       properties: {
         ma_he_thong_rap: { type: 'string', description: 'Mã hệ thống rạp', example: '1' },
         ten_he_thong_rap: { type: 'string', description: 'Tên hệ thống rạp', example: 'CGV Cinemas' },
-        logo: { type: 'string', format: 'binary', description: 'File logo (optional)' },
+        logo: { type: 'string', format: 'binary', description: 'File logo (optional)', nullable: true },
       },
     },
   })
@@ -89,15 +82,7 @@ export class SystemsController {
   @ApiResponse({ status: 404, description: 'Không tìm thấy hệ thống rạp' })
   updateHeThongRap(
     @Body() body: UpdateHeThongRapDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
-        ],
-        fileIsRequired: false,
-      }),
-    )
-    file?: Express.Multer.File,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     return this.systemsService.updateHeThongRap(body, file?.filename);
   }

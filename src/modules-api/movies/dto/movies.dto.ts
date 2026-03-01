@@ -99,6 +99,10 @@ export class UpdateMovieDto {
   @IsOptional()
   @IsString({ message: 'Sắp chiếu phải là chuỗi' })
   sap_chieu?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  image?: any;
 }
 
 export class CreateShowtimeDto {

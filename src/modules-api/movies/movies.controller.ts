@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, ParseFilePipe, MaxFileSizeValidator, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -56,14 +56,7 @@ export class MoviesController {
   @ApiResponse({ status: 403, description: 'Không có quyền' })
   createMovie(
     @Body() body: CreateMovieDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
-        ],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File,
   ) {
     return this.moviesService.createMovie(body, file.filename);
   }
@@ -101,15 +94,7 @@ export class MoviesController {
   @ApiResponse({ status: 404, description: 'Không tìm thấy phim' })
   updateMovie(
     @Body() body: UpdateMovieDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
-        ],
-        fileIsRequired: false, // Image is optional for update
-      }),
-    )
-    file?: Express.Multer.File,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     return this.moviesService.updateMovie(body, file?.filename);
   }

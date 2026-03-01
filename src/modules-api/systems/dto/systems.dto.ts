@@ -18,6 +18,10 @@ export class UpdateHeThongRapDto {
   @IsOptional()
   @IsString({ message: 'Tên hệ thống rạp phải là chuỗi' })
   ten_he_thong_rap?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  logo?: any;
 }
 
 export class CreateCumRap {

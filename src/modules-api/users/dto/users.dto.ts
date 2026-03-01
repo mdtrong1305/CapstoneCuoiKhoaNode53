@@ -79,12 +79,6 @@ export class UpdateUserByAdminDto {
   @IsString({ message: 'Số điện thoại phải là chuỗi' })
   so_dt?: string;
 
-  @ApiProperty({ example: 'password123', description: 'Mật khẩu mới (ít nhất 6 ký tự)', required: false })
-  @IsOptional()
-  @IsString({ message: 'Mật khẩu phải là chuỗi' })
-  @MinLength(6, { message: 'Mật khẩu phải có ít nhất 6 ký tự' })
-  mat_khau?: string;
-
   @ApiProperty({ example: 'KHACH_HANG', description: 'Loại người dùng', enum: ['KHACH_HANG', 'QUAN_TRI'], required: false })
   @IsOptional()
   @IsString({ message: 'Loại người dùng phải là chuỗi' })

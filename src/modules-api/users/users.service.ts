@@ -190,9 +190,6 @@ export class UsersService {
     if (updateUserByAdminDto.email) updateData.email = updateUserByAdminDto.email;
     if (updateUserByAdminDto.so_dt) updateData.so_dt = updateUserByAdminDto.so_dt;
     if (updateUserByAdminDto.loai_nguoi_dung) updateData.loai_nguoi_dung = updateUserByAdminDto.loai_nguoi_dung;
-    if (updateUserByAdminDto.mat_khau) {
-      updateData.mat_khau = bcrypt.hashSync(updateUserByAdminDto.mat_khau, 10);
-    }
 
     // Update user
     const updatedUser = await this.prisma.nguoiDung.update({

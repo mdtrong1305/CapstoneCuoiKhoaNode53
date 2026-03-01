@@ -24,8 +24,11 @@ export const createMulterConfig = (subfolder: string) => ({
       cb(null, uniqueFilename);
     },
   }),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB - Validate TRƯỚC KHI lưu file
+  },
   fileFilter: (req, file, cb) => {
-    // chặn file lỏ ngay từ cấu hình Multer
+    // chặn file không đúng format ngay từ cấu hình Multer
     if (!file.mimetype.match(/\/(jpg|jpeg|png|gif|webp)$/)) {
       return cb(new BadRequestException('Chỉ chấp nhận file ảnh!'), false);
     }
