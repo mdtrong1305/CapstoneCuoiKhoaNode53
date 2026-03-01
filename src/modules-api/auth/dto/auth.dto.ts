@@ -30,12 +30,12 @@ export class RegisterDto {
 }
 
 export class LoginDto {
-  @ApiProperty({ example: 'john_doe', description: 'Tài khoản' })
+  @ApiProperty({ example: 'admin', description: 'Tài khoản' })
   @IsNotEmpty({ message: 'Tài khoản không được để trống' })
   @IsString({ message: 'Tài khoản phải là chuỗi' })
   tai_khoan!: string;
 
-  @ApiProperty({ example: 'password123', description: 'Mật khẩu' })
+  @ApiProperty({ example: 'Admin@123', description: 'Mật khẩu' })
   @IsNotEmpty({ message: 'Mật khẩu không được để trống' })
   @IsString({ message: 'Mật khẩu phải là chuỗi' })
   mat_khau!: string;

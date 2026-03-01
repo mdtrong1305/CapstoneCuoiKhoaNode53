@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
 import { SeatsService } from './seats.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
 import { IsRole } from '../../common/decorators/role.decorator';
 import { CreateSeatDto, UpdateSeatDto } from './dto/seats.dto';
+import { RoleGuard } from '../../common/guards/role.guard';
 
 @ApiTags('Quản lý ghế theo lịch chiếu')
 @Controller('seats')
@@ -18,6 +19,7 @@ export class SeatsController {
   }
 
   @Post()
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Thêm ghế mới dựa theo mã rạp (Chỉ QUAN_TRI)' })
@@ -31,6 +33,7 @@ export class SeatsController {
   }
 
   @Put()
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Cập nhật ghế dựa theo mã ghế (Chỉ QUAN_TRI)' })
@@ -44,6 +47,7 @@ export class SeatsController {
   }
 
   @Delete(':ma_ghe')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa ghế (Chỉ QUAN_TRI)' })

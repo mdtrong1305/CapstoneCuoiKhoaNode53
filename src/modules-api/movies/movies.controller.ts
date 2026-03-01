@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, ParseFilePipe, MaxFileSizeValidator, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Query, Post, Put, Delete, UseInterceptors, UploadedFile, Body, ParseFilePipe, MaxFileSizeValidator, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -6,6 +6,7 @@ import { IsRole } from '../../common/decorators/role.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerMoviesConfig } from '../../common/configs/multer.config';
 import { CreateMovieDto, UpdateMovieDto, CreateShowtimeDto, UpdateShowtimeDto } from './dto/movies.dto';
+import { RoleGuard } from '../../common/guards/role.guard';
 
 @ApiTags('Quản lý phim và lịch chiếu')
 @ApiExtraModels(CreateMovieDto, UpdateMovieDto)
@@ -25,6 +26,7 @@ export class MoviesController {
   }
 
   @Post('create-movie')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('image', multerMoviesConfig))
@@ -67,6 +69,7 @@ export class MoviesController {
   }
 
   @Put('update-movie')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('image', multerMoviesConfig))
@@ -112,6 +115,7 @@ export class MoviesController {
   }
 
   @Delete('delete-movie/:ma_phim')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa phim (Chỉ QUAN_TRI)' })
@@ -142,6 +146,7 @@ export class MoviesController {
   }
 
   @Post('create-showtime')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Tạo lịch chiếu mới (Chỉ QUAN_TRI)' })
@@ -155,6 +160,7 @@ export class MoviesController {
   }
 
   @Put('update-showtime')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Cập nhật lịch chiếu (Chỉ QUAN_TRI)' })
@@ -165,6 +171,7 @@ export class MoviesController {
   }
 
   @Delete('delete-showtime/:ma_lich_chieu')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa lịch chiếu (Chỉ QUAN_TRI)' })

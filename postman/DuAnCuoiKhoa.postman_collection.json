@@ -1,0 +1,1606 @@
+{
+  "info": {
+    "_postman_id": "7448b60f-c0f4-46b7-a57d-c65bc92e0c4a",
+    "name": "DuAnCuoiKhoa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50372786",
+    "_collection_link": "https://go.postman.co/collection/50372786-7448b60f-c0f4-46b7-a57d-c65bc92e0c4a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const { data } = pm.response.json();\r",
+                  "\r",
+                  "console.log(data.accessToken)\r",
+                  "\r",
+                  "pm.globals.set(\"accessToken\", data.accessToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tai_khoan\": \"admin\",\r\n  \"mat_khau\": \"Admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/auth/login",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const { data } = pm.response.json();\r",
+                  "\r",
+                  "console.log(data.accessToken)\r",
+                  "\r",
+                  "pm.globals.set(\"accessToken\", data.accessToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tai_khoan\": \"mdtrong1305\",\r\n  \"mat_khau\": \"123@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/auth/login",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tai_khoan\": \"mdtrong1305\",\r\n  \"ho_ten\": \"Mai Đức Trọng\",\r\n  \"email\": \"mdtrong1305@gmail.com\",\r\n  \"so_dt\": \"0123456789\",\r\n  \"mat_khau\": \"123@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/auth/register",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users (ADMIN)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users/get-users?page=1&pageSize=10",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "get-users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{domain}}/users/profile",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile User (ADMIN)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{domain}}/users/detail/mdtrong1305",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "detail",
+                "mdtrong1305"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"ho_ten\": \"Admin Two\",\r\n  \"email\": \"admin02@example.com\",\r\n  \"so_dt\": \"0987654321\",\r\n  \"mat_khau\": \"password123\",\r\n  \"loai_nguoi_dung\": \"QUAN_TRI\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users/create-user",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "create-user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update My Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ho_ten\": \"TRONG Updated\",\r\n  \"email\": \"newemail@example.com\",\r\n  \"so_dt\": \"0999888777\",\r\n  \"mat_khau\": \"newpassword1232\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users/profile",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile User (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tai_khoan\": \"mdtrong1305\",\r\n  \"ho_ten\": \"TRONG Updated by ADMIN\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users/update",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Get All Cinema System",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/systems/cinema-system",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-system"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Cinema Complex",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/systems/cinema-complex/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-complex",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Cinema",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/systems/cinema/2",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Cinema System (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ten_he_thong_rap",
+                  "value": "test",
+                  "type": "text",
+                  "uuid": "af6b5829-7d7f-466c-9e8f-49c5e947fadb"
+                },
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "uuid": "f43dbf3a-09e0-4562-a9a8-b7031a69a440",
+                  "src": "/C:/Users/mdtro/Downloads/galaxy-cinema.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-system",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-system"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Cinema Complex (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ten_cum_rap\": \"CGV Vincom\",\r\n  \"dia_chi\": \"123 Nguyễn Văn A, Quận 1\",\r\n  \"ma_he_thong_rap\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-complex",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-complex"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Cinema (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ten_rap\": \"Rạp 1\",\r\n  \"ma_cum_rap\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Cinema System (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ma_he_thong_rap",
+                  "value": "55",
+                  "type": "text",
+                  "uuid": "e774490b-8cfd-4d8e-8d05-d109eda8ec6a"
+                },
+                {
+                  "key": "ten_he_thong_rap",
+                  "value": "test 123",
+                  "type": "text",
+                  "uuid": "af6b5829-7d7f-466c-9e8f-49c5e947fadb",
+                  "disabled": true
+                },
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "uuid": "f43dbf3a-09e0-4562-a9a8-b7031a69a440",
+                  "src": "/C:/Users/mdtro/Downloads/galaxy-cinema.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-system",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-system"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Cinema Complex (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_cum_rap\": \"11\",\r\n  \"ten_cum_rap\": \"CGV Vincom Center\",\r\n  \"dia_chi\": \"456 Lê Văn B, Quận 2\",\r\n  \"ma_he_thong_rap\": \"2\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-complex",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-complex"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Cinema Complex (ADMIN) Copy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_rap\": \"51\",\r\n  \"ten_rap\": \"Rạp 1 - Premium\",\r\n  \"ma_cum_rap\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cinema System (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-system/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-system",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cinema Complex (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema-complex/11",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema-complex",
+                "11"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cinema Complex (ADMIN) Copy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/systems/cinema/51",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "systems",
+                "cinema",
+                "51"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "item": [
+        {
+          "name": "Get All Movies",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/showtimes-by-movie/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "showtimes-by-movie",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Show Time By Movie",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/showtimes-by-movie/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "showtimes-by-movie",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Show Time By Cinema",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/showtimes-by-cinema/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "showtimes-by-cinema",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Movie (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ten_phim",
+                  "value": "Avatar 2",
+                  "type": "text",
+                  "uuid": "af6b5829-7d7f-466c-9e8f-49c5e947fadb"
+                },
+                {
+                  "key": "trailer",
+                  "value": "https://youtube.com/...",
+                  "type": "text",
+                  "uuid": "e7f002b5-5e9e-4f01-af0f-c81513ad2e09"
+                },
+                {
+                  "key": "mo_ta",
+                  "value": "Phim khoa học viễn tưởng",
+                  "type": "text",
+                  "uuid": "342693b9-20ba-4fd3-9527-d583525face4"
+                },
+                {
+                  "key": "ngay_khoi_chieu",
+                  "value": "2024-12-31",
+                  "type": "text",
+                  "uuid": "cb44f8f9-6144-42c9-aa5e-98ee3c006df3"
+                },
+                {
+                  "key": "danh_gia",
+                  "value": "8.5",
+                  "type": "text",
+                  "uuid": "6bb0e30a-5ec0-4676-996f-4eca89d77aa1"
+                },
+                {
+                  "key": "hot",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "466d6f01-02e3-4db8-95db-721611654d1b"
+                },
+                {
+                  "key": "dang_chieau",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "5ac934c6-f88b-494d-a3e0-70709599cc0c"
+                },
+                {
+                  "key": "sap_chieu",
+                  "value": "false",
+                  "type": "text",
+                  "uuid": "6fbacfcc-ada4-4432-9c3c-e327c7158007"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "f43dbf3a-09e0-4562-a9a8-b7031a69a440",
+                  "src": "/C:/Users/mdtro/Downloads/galaxy-cinema.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/movies/create-movie",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "create-movie"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New ShowTime(ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_rap\": 1,\r\n  \"ma_phim\": 2,\r\n  \"ngay_gio_chieu\": \"2026-03-02T13:00:00.000Z\",\r\n  \"gia_ve\": 100000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/create-showtime",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "create-showtime"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Movie (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ma_phim",
+                  "value": "7",
+                  "type": "text",
+                  "uuid": "85551356-610a-439b-806a-62d14795f775"
+                },
+                {
+                  "key": "ten_phim",
+                  "value": "Avatar 2",
+                  "type": "text",
+                  "uuid": "af6b5829-7d7f-466c-9e8f-49c5e947fadb",
+                  "disabled": true
+                },
+                {
+                  "key": "trailer",
+                  "value": "https://youtube.com/...",
+                  "type": "text",
+                  "uuid": "e7f002b5-5e9e-4f01-af0f-c81513ad2e09",
+                  "disabled": true
+                },
+                {
+                  "key": "mo_ta",
+                  "value": "Phim khoa học viễn tưởng",
+                  "type": "text",
+                  "uuid": "342693b9-20ba-4fd3-9527-d583525face4",
+                  "disabled": true
+                },
+                {
+                  "key": "ngay_khoi_chieu",
+                  "value": "2024-12-31",
+                  "type": "text",
+                  "uuid": "cb44f8f9-6144-42c9-aa5e-98ee3c006df3",
+                  "disabled": true
+                },
+                {
+                  "key": "danh_gia",
+                  "value": "8.5",
+                  "type": "text",
+                  "uuid": "6bb0e30a-5ec0-4676-996f-4eca89d77aa1",
+                  "disabled": true
+                },
+                {
+                  "key": "hot",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "466d6f01-02e3-4db8-95db-721611654d1b",
+                  "disabled": true
+                },
+                {
+                  "key": "dang_chieau",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "5ac934c6-f88b-494d-a3e0-70709599cc0c",
+                  "disabled": true
+                },
+                {
+                  "key": "sap_chieu",
+                  "value": "false",
+                  "type": "text",
+                  "uuid": "6fbacfcc-ada4-4432-9c3c-e327c7158007",
+                  "disabled": true
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "f43dbf3a-09e0-4562-a9a8-b7031a69a440",
+                  "src": "/C:/Users/mdtro/Downloads/Lotte-Cinema.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/movies/update-movie",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "update-movie"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update ShowTime (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_lich_chieu\": 202,\r\n  \"ma_rap\": 1,\r\n  \"ngay_gio_chieu\": \"2026-03-01T06:00:00.000Z\",\r\n  \"gia_ve\": 100000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/update-showtime",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "update-showtime"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Movie (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/delete-movie/7",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "delete-movie",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete ShowTime (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/movies/delete-showtime/202",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "movies",
+                "delete-showtime",
+                "202"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Banner",
+      "item": [
+        {
+          "name": "Get All Banner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/banners",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "banners"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Image Banner(ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ma_phim",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "af6b5829-7d7f-466c-9e8f-49c5e947fadb"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "f43dbf3a-09e0-4562-a9a8-b7031a69a440",
+                  "src": "/C:/Users/mdtro/Downloads/cine-star.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/banners",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "banners"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Banner (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/banners/4",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "banners",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Seats",
+      "item": [
+        {
+          "name": "Get Seat By ShowTime",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/seats/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "seats",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Seat (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ten_ghe\": \"A100\",\r\n  \"loai_ghe\": \"VIP\",\r\n  \"ma_rap\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/seats",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "seats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Seat (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_ghe\": 8192,\r\n  \"ten_ghe\": \"A100\",\r\n  \"loai_ghe\": \"sieu vip\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/seats",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "seats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Seat (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/seats/8192",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "seats",
+                "8192"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ticket",
+      "item": [
+        {
+          "name": "Get History Ticket For User",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/tickets/history",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "tickets",
+                "history"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Detail Ticket",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/tickets/detail/4",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "tickets",
+                "detail",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buy Ticket",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ma_lich_chieu\": 3,\r\n  \"danh_sach_ghe\": [1, 2, 3, 15, 16]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/tickets/",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "tickets",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

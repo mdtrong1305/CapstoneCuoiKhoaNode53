@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, ParseFilePipe, MaxFileSizeValidator } from '@nestjs/common';
+import { Controller, Get, Post, Delete, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, ParseFilePipe, MaxFileSizeValidator, UseGuards } from '@nestjs/common';
 import { BannerService } from './banner.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -6,6 +6,7 @@ import { IsRole } from '../../common/decorators/role.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerBannersConfig } from '../../common/configs/multer.config';
 import { UploadBannerImageDto } from './dto/banner.dto';
+import { RoleGuard } from '../../common/guards/role.guard';
 
 @ApiTags('Quản lý ảnh banner')
 @ApiExtraModels(UploadBannerImageDto)
@@ -22,6 +23,7 @@ export class BannerController {
   }
 
   @Post('')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('image', multerBannersConfig))
@@ -66,6 +68,7 @@ export class BannerController {
   }
 
   @Delete('/:ma_banner')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa ảnh banner (Chỉ QUAN_TRI)' })

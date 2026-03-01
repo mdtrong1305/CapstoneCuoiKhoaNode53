@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateProfileDto, UpdateUserByAdminDto } from './dto/users.dto';
 import { IsRole } from '../../common/decorators/role.decorator';
 import { User } from '../../common/decorators/user.decorator';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import type { NguoiDung } from '../../modules-system/prisma/generated/prisma/client';
+import { RoleGuard } from '../../common/guards/role.guard';
 
 @ApiTags('Quản lý người dùng')
 @Controller('users')
@@ -12,6 +13,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('create-user')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Tạo người dùng mới (Chỉ QUAN_TRI)' })
@@ -33,6 +35,7 @@ export class UsersController {
   }
 
   @Get('get-users')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Lấy danh sách người dùng (Chỉ QUAN_TRI)' })
@@ -47,6 +50,7 @@ export class UsersController {
   }
 
   @Get('detail/:tai_khoan')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Lấy thông tin người dùng theo tài khoản (Chỉ QUAN_TRI)' })
@@ -69,6 +73,7 @@ export class UsersController {
   }
 
   @Put('update')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Cập nhật thông tin người dùng (Chỉ QUAN_TRI)' })
@@ -82,6 +87,7 @@ export class UsersController {
   }
 
   @Delete('delete/:tai_khoan')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa người dùng (Chỉ QUAN_TRI)' })

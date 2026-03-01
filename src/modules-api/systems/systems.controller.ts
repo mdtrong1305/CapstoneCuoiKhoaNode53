@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, UseGuards } from '@nestjs/common';
 import { SystemsService } from './systems.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiConsumes, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -13,6 +13,7 @@ import {
   CreateRapPhim,
   UpdateRapPhim,
 } from './dto/systems.dto';
+import { RoleGuard } from '../../common/guards/role.guard';
 
 @ApiTags('Quản lý hệ thống rạp, cụm rạp và rạp phim')
 @ApiExtraModels(CreateHeThongRapDto, UpdateHeThongRapDto, CreateCumRap, UpdateCumRap, CreateRapPhim, UpdateRapPhim)
@@ -29,6 +30,7 @@ export class SystemsController {
   }
 
   @Post('cinema-system')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('logo', multerHeThongRapConfig))
@@ -63,6 +65,7 @@ export class SystemsController {
   }
 
   @Put('cinema-system')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('logo', multerHeThongRapConfig))
@@ -100,6 +103,7 @@ export class SystemsController {
   }
 
   @Delete('cinema-system/:ma_he_thong_rap')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa hệ thống rạp (Chỉ QUAN_TRI)' })
@@ -121,6 +125,7 @@ export class SystemsController {
   }
 
   @Post('cinema-complex')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Tạo cụm rạp mới (Chỉ QUAN_TRI)' })
@@ -134,6 +139,7 @@ export class SystemsController {
   }
 
   @Put('cinema-complex')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Cập nhật cụm rạp (Chỉ QUAN_TRI)' })
@@ -147,6 +153,7 @@ export class SystemsController {
   }
 
   @Delete('cinema-complex/:ma_cum_rap')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa cụm rạp (Chỉ QUAN_TRI)' })
@@ -168,6 +175,7 @@ export class SystemsController {
   }
 
   @Post('cinema')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Tạo rạp mới (Chỉ QUAN_TRI)' })
@@ -181,6 +189,7 @@ export class SystemsController {
   }
 
   @Put('cinema')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Cập nhật rạp (Chỉ QUAN_TRI)' })
@@ -194,6 +203,7 @@ export class SystemsController {
   }
 
   @Delete('cinema/:ma_rap')
+  @UseGuards(RoleGuard)
   @IsRole('QUAN_TRI')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Xóa rạp (Chỉ QUAN_TRI)' })

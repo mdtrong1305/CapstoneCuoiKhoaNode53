@@ -7,7 +7,8 @@ import { AuthModule } from './modules-api/auth/auth.module';
 import { MoviesModule } from './modules-api/movies/movies.module';
 import { BannerModule } from './modules-api/banner/banner.module';
 import { SystemsModule } from './modules-api/systems/systems.module';
-import { ProtectGuard } from './common/guards/protect.guard';
+import { AuthGuard } from './common/guards/protect.guard';
+import { RoleGuard } from './common/guards/role.guard';
 import { TicketModule } from './modules-api/ticket/ticket.module';
 import { SeatsModule } from './modules-api/seats/seats.module';
 
@@ -27,8 +28,9 @@ import { SeatsModule } from './modules-api/seats/seats.module';
   providers: [
     {
       provide: APP_GUARD,
-      useClass: ProtectGuard,
+      useClass: AuthGuard,
     },
+    RoleGuard,
   ],
 })
 export class AppModule {}
