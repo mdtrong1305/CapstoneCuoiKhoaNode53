@@ -11,6 +11,7 @@ API backend cho hệ thống quản lý đặt vé rạp phim, xây dựng với
 - [API Documentation](#-api-documentation)
 - [Postman Collection](#-postman-collection)
 - [Đặc tả API](#-đặc-tả-api)
+- [Nghiệp vụ hệ thống](#-nghiệp-vụ-hệ-thống)
 - [Cấu trúc Database](#️-cấu-trúc-database)
 - [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
 - [Thông tin tài khoản Test](#-thông-tin-tài-khoản-test)
@@ -657,7 +658,157 @@ Ngoài Swagger UI, bạn có thể sử dụng Postman để test API với coll
 - **Note**: Có thể đặt nhiều ghế cùng lúc
 
 ---
-## �🗄️ Cấu trúc Database
+## 🔒 Nghiệp vụ hệ thống
+
+Hệ thống triển khai các quy tắc nghiệp vụ sau để đảm bảo tính toàn vẹn dữ liệu và trải nghiệm người dùng:
+
+### 1. Xác thực & Phân quyền
+
+#### 1.1. Phân quyền quản trị (QUAN_TRI)
+- ✅ Chỉ tài khoản có role `QUAN_TRI` mới có quyền:
+  - Tạo, cập nhật, xóa người dùng
+  - Tạo, cập nhật, xóa phim và lịch chiếu
+  - Upload và xóa banner
+  - Quản lý hệ thống rạp, cụm rạp, rạp phim
+  - Tạo, cập nhật, xóa ghế
+
+#### 1.2. Bảo mật dữ liệu cá nhân
+- ✅ Người dùng chỉ có thể:
+  - Xem và cập nhật profile của chính mình
+  - Xem lịch sử đặt vé của chính mình
+  - Xem chi tiết vé của chính mình
+- ❌ Không thể xem thông tin vé đã đặt của người khác
+- ❌ Không thể cập nhật thông tin của người khác
+
+#### 1.3. Bảo mật mật khẩu
+- ✅ Mật khẩu được hash bằng bcrypt trước khi lưu vào database
+- ✅ JWT token có thời gian hết hạn để tăng cường bảo mật
+
+### 2. Quản lý đặt vé
+
+#### 2.1. Xác thực ghế hợp lệ
+- ✅ Ghế phải tồn tại trong hệ thống
+- ✅ Ghế phải thuộc rạp của suất chiếu được chọn
+- ❌ Không được đặt ghế không thuộc rạp của suất chiếu
+
+#### 2.2. Kiểm tra trùng ghế
+- ✅ Sử dụng database transaction để đảm bảo tính toàn vẹn
+- ❌ Không cho phép đặt ghế đã có người khác đặt cho cùng suất chiếu
+- ℹ️ Hiển thị danh sách ghế bị trùng để người dùng chọn ghế khác
+
+#### 2.3. Đặt nhiều ghế cùng lúc
+- ✅ Cho phép đặt nhiều ghế trong một lần giao dịch
+- ✅ Tất cả ghế được kiểm tra cùng lúc trong transaction
+- ❌ Nếu có bất kỳ ghế nào không hợp lệ, toàn bộ giao dịch bị hủy
+
+#### 2.4. Quyền riêng tư
+- ✅ Mỗi người dùng chỉ xem được lịch sử và chi tiết vé của chính mình
+- ❌ Không thể xem vé của người khác dù có `ma_dat_ve`
+
+### 3. Quản lý lịch chiếu
+
+#### 3.1. Validate thời gian chiếu
+- ✅ Ngày giờ chiếu phải lớn hơn thời gian hiện tại
+- ❌ Không cho phép tạo/cập nhật lịch chiếu trong quá khứ
+
+#### 3.2. Kiểm tra trùng lịch chiếu
+- ✅ Hai suất chiếu cùng rạp phải cách nhau tối thiểu: **thời lượng phim + 30 phút nghỉ**
+- ❌ Không cho phép tạo lịch chiếu trùng với lịch chiếu đã có
+- ℹ️ Hiển thị thông tin chi tiết về suất chiếu bị trùng để admin điều chỉnh
+
+**Ví dụ:**
+```
+Lịch chiếu A: 19:00 - 21:00 (phim 120 phút)
+Nghỉ giữa các suất: 30 phút
+Lịch chiếu B sớm nhất: 21:30 ✅
+
+Lịch chiếu C: 21:00 ❌ (Trùng với thời gian nghỉ)
+```
+
+#### 3.3. Cập nhật lịch chiếu
+- ✅ Khi cập nhật, không tự check xung đột với chính lịch chiếu đó (`excludeShowtimeId`)
+- ✅ Vẫn kiểm tra xung đột với các lịch chiếu khác trong rạp
+- ✅ Cho phép cập nhật một phần (rạp, phim, thời gian, giá vé)
+
+#### 3.4. Xóa lịch chiếu
+- ⚠️ Xóa lịch chiếu sẽ xóa cascade tất cả vé đã đặt (theo schema)  
+- 💡 **Khuyến nghị**: Nên disable/ẩn lịch chiếu thay vì xóa trong production
+
+### 4. Quản lý ghế
+
+#### 4.1. Ràng buộc dữ liệu
+- ✅ Ghế phải thuộc một rạp cụ thể
+- ✅ Tên ghế và loại ghế (Thuong/Vip) phải hợp lệ
+
+#### 4.2. Xóa ghế
+- ❌ Không thể xóa ghế đã từng được đặt vé (có foreign key constraint)
+- ℹ️ Database sẽ từ chối xóa nếu vi phạm ràng buộc
+
+### 5. Upload file
+
+#### 5.1. Validate file type
+- ✅ Chỉ chấp nhận file ảnh: jpg, jpeg, png, gif, webp
+- ❌ Từ chối các loại file khác (pdf, doc, exe...)
+- ℹ️ Validation bằng mimetype check trong Multer config
+
+#### 5.2. Validate file size
+- ✅ File tối đa 5MB
+- ✅ Validate TRƯỚC KHI lưu file vào disk (trong Multer limits)
+- ❌ Từ chối request nếu file quá lớn, không tạo file rác trên server
+
+#### 5.3. Quản lý file
+- ✅ File được lưu với tên unique: `timestamp-originalname.ext`
+- ✅ Tự động tạo thư mục nếu chưa tồn tại
+- ✅ Khi cập nhật, xóa file cũ và lưu file mới
+- ✅ Khi xóa record, xóa file vật lý trên disk
+
+### 6. Tính toàn vẹn dữ liệu (Data Integrity)
+
+#### 6.1. Cascade Delete
+- ✅ Xóa hệ thống rạp → xóa tất cả cụm rạp thuộc hệ thống
+- ✅ Xóa cụm rạp → xóa tất cả rạp phim thuộc cụm
+- ✅ Xóa rạp phim → xóa tất cả ghế và lịch chiếu của rạp
+- ⚠️ **Cẩn thận**: Xóa cascade có thể ảnh hưởng nhiều bản ghi
+
+#### 6.2. Foreign Key Constraints
+- ✅ Không thể tạo lịch chiếu với `ma_rap` hoặc `ma_phim` không tồn tại
+- ✅ Không thể đặt vé cho lịch chiếu không tồn tại
+- ✅ Không thể tạo ghế cho rạp không tồn tại
+
+#### 6.3. Transaction
+- ✅ Đặt vé sử dụng database transaction
+- ✅ Nếu bất kỳ bước nào fail, toàn bộ giao dịch rollback
+- ✅ Đảm bảo không có trạng thái dữ liệu không nhất quán
+
+### 7. Validation & Error Handling
+
+#### 7.1. Input Validation
+- ✅ Validate tất cả input bằng class-validator
+- ✅ Whitelist: Chỉ cho phép các field được định nghĩa trong DTO
+- ✅ Forbid non-whitelisted: Từ chối field không được định nghĩa
+- ✅ Transform: Tự động convert type khi cần (string → number, date...)
+
+#### 7.2. Error Messages
+- ✅ Error message rõ ràng, dễ hiểu cho client
+- ✅ Hiển thị thông tin chi tiết về lỗi (ghế nào bị trùng, lịch chiếu nào conflict...)
+- ✅ HTTP status code phù hợp:
+  - 400: Bad Request (validation error, business logic error)
+  - 401: Unauthorized (chưa đăng nhập)
+  - 403: Forbidden (không có quyền)
+  - 404: Not Found (resource không tồn tại)
+
+### 8. Logging & Monitoring
+
+#### 8.1. Request Logging
+- ✅ Log tất cả request với method, URL, status code
+- ✅ Log response time để monitor performance
+- ✅ LoggingInterceptor tự động áp dụng cho tất cả endpoints
+
+#### 8.2. Response Formatting
+- ✅ Tất cả success response được chuẩn hóa qua ResponseSuccessInterceptor
+- ✅ Consistent response structure cho dễ dàng xử lý ở client
+
+---## �🗄️ Cấu trúc Database
 
 ### Các bảng chính:
 
