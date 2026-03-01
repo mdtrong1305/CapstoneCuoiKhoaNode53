@@ -1,8 +1,14 @@
+-- =============================================
+-- INSERT DỮ LIỆU MẪU CHO DATABASE QUẢN LÝ ĐẶT VÉ RẠP PHIM
+-- =============================================
+
+-- 1. Thêm người dùng mẫu (1 admin + 1 khách hàng)
 INSERT INTO NguoiDung (tai_khoan, ho_ten, email, so_dt, mat_khau, loai_nguoi_dung) 
 VALUES 
 ('admin', 'ÁT MIN', 'admin@admin.com', '0999999999', '$2b$10$glNP/nEhaMedu54aWANACeoA5kiC//5rqf.0G2XbV/bfHy2uswx8G', 'QUAN_TRI'),
 ('mdtrong1305', 'Mai Đức Trọng', 'mdtrong1305@gmail.com', '0123456789', '$2b$10$t8UFgNyWPpjk15X.NBSsRuTMVx3mjjKLtS3XdR6NuQXiD5Qk3yEl6', 'KHACH_HANG');
 
+-- 2. Thêm danh sách phim
 INSERT INTO Phim (ten_phim, trailer, hinh_anh, mo_ta, ngay_khoi_chieu, danh_gia, thoi_luong, hot, dang_chieu, sap_chieu) 
 VALUES 
 ('Lật Mặt 7: Một Điều Ước', 'https://youtube.com/', 'movies/1772176954460-lat-mat-7.jpg', 'Câu chuyện cảm động về tình gia đình của bà Hai và 5 người con.', '2024-04-26', 10, 120, true, true, false),
@@ -11,12 +17,14 @@ VALUES
 ('Kung Fu Panda 4', 'https://youtube.com/', 'movies/1772176907587-470x700-kungfupanda4_23eYVYq.jpg', 'Gấu Po trở lại với vai trò là Thủ lĩnh tâm linh của Thung lũng Bình Yên.', '2024-03-08', 8, 95, false, true, false),
 ('Deadpool & Wolverine', 'https://youtube.com/', 'movies/1772176926504-470x700-deadpool.jpg', 'Màn kết hợp bùng nổ của hai siêu anh hùng lầy lội nhất vũ trụ Marvel.', '2024-07-26', 10, 135, false, true, false);
 
+-- 3. Thêm banner quảng cáo
 INSERT INTO Banner (ma_phim, hinh_anh) 
 VALUES 
 (4, 'banners/1772177103092-kungfu4.jpg'),
 (3, 'banners/1772177173982-Review_DuneTwo.jpg'),
 (5, 'banners/1772177214910-deadpool_banner.jpg');
 
+-- 4. Thêm hệ thống rạp (CGV, BHD, Lotte, Galaxy, CineStar)
 INSERT INTO HeThongRap (ten_he_thong_rap, logo) 
 VALUES 
 ('BHD Star Cineplex', 'cinema-system/1772183417023-Logo_BHD_Star_Cineplex.png'),
@@ -25,61 +33,35 @@ VALUES
 ('Lotte Cinema', 'cinema-system/1772183501639-Lotte-Cinema.png'),
 ('Galaxy Cinema', 'cinema-system/1772184646496-galaxy-cinema.png');
 
+-- 5. Thêm cụm rạp (10 cụm rạp thuộc các hệ thống rạp)
 INSERT INTO CumRap (ten_cum_rap, dia_chi, ma_he_thong_rap) 
 VALUES 
--- Hệ thống BHD Star (ma_he_thong_rap = 1)
 ('BHD Star Cineplex - 3/2', 'Lầu 5, Siêu Thị Vincom 3/2, 3C Đường 3/2, Q.10', 1),
 ('BHD Star Cineplex - Bitexco', 'Lầu 3 & 4, Bitexco Icon 68, 2 Hải Triều, Q.1', 1),
-
--- Hệ thống CGV (ma_he_thong_rap = 2)
 ('CGV Aeon Bình Tân', 'Tầng 3, TTTM Aeon Mall Bình Tân, Q. Bình Tân', 2),
 ('CGV Liberty Citypoint', 'Tầng M - 1, Khách sạn Liberty Center Citypoint, 59 Pasteur, Q.1', 2),
-
--- Hệ thống CineStar (ma_he_thong_rap = 3)
 ('CineStar Quốc Thanh', '271 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Q.1', 3),
 ('CineStar Hai Bà Trưng', '135 Hai Bà Trưng, Phường Bến Nghé, Q.1', 3),
-
--- Hệ thống Lotte Cinema (ma_he_thong_rap = 4)
 ('Lotte Cinema Nam Sài Gòn', 'Tầng 3, Lotte Mart Nam Sài Gòn, Q.7', 4),
 ('Lotte Cinema Gò Vấp', 'Tầng 3, Lotte Mart Gò Vấp, Q. Gò Vấp', 4),
-
--- Hệ thống Galaxy Cinema (ma_he_thong_rap = 5)
 ('Galaxy Nguyễn Du', '116 Nguyễn Du, Quận 1', 5),
 ('Galaxy Tân Bình', '246 Nguyễn Hồng Đào, Q. Tân Bình', 5);
 
+-- 6. Thêm rạp phim (50 rạp, mỗi cụm rạp có 5 rạp)
 INSERT INTO RapPhim (ten_rap, ma_cum_rap) 
 VALUES 
--- Cụm BHD Star 3/2 (ma_cum_rap = 1)
 ('Rạp 1', 1), ('Rạp 2', 1), ('Rạp 3', 1), ('Rạp 4', 1), ('Rạp 5', 1),
-
--- Cụm BHD Star Bitexco (ma_cum_rap = 2)
 ('Rạp 1', 2), ('Rạp 2', 2), ('Rạp 3', 2), ('Rạp 4', 2), ('Rạp 5', 2),
-
--- Cụm CGV Aeon Bình Tân (ma_cum_rap = 3)
 ('Rạp 1', 3), ('Rạp 2', 3), ('Rạp 3', 3), ('Rạp 4', 3), ('Rạp 5', 3),
-
--- Cụm CGV Liberty Citypoint (ma_cum_rap = 4)
 ('Rạp 1', 4), ('Rạp 2', 4), ('Rạp 3', 4), ('Rạp 4', 4), ('Rạp 5', 4),
-
--- Cụm CineStar Quốc Thanh (ma_cum_rap = 5)
 ('Rạp 1', 5), ('Rạp 2', 5), ('Rạp 3', 5), ('Rạp 4', 5), ('Rạp 5', 5),
-
--- Cụm CineStar Hai Bà Trưng (ma_cum_rap = 6)
 ('Rạp 1', 6), ('Rạp 2', 6), ('Rạp 3', 6), ('Rạp 4', 6), ('Rạp 5', 6),
-
--- Cụm Lotte Nam Sài Gòn (ma_cum_rap = 7)
 ('Rạp 1', 7), ('Rạp 2', 7), ('Rạp 3', 7), ('Rạp 4', 7), ('Rạp 5', 7),
-
--- Cụm Lotte Gò Vấp (ma_cum_rap = 8)
 ('Rạp 1', 8), ('Rạp 2', 8), ('Rạp 3', 8), ('Rạp 4', 8), ('Rạp 5', 8),
-
--- Cụm Galaxy Nguyễn Du (ma_cum_rap = 9)
 ('Rạp 1', 9), ('Rạp 2', 9), ('Rạp 3', 9), ('Rạp 4', 9), ('Rạp 5', 9),
-
--- Cụm Galaxy Tân Bình (ma_cum_rap = 10)
 ('Rạp 1', 10), ('Rạp 2', 10), ('Rạp 3', 10), ('Rạp 4', 10), ('Rạp 5', 10);
 
--- Batch 1: Rạp 1 đến 13
+-- 7. Thêm lịch chiếu (200 lịch chiếu, mỗi rạp có 4 suất chiếu)
 INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (1, 1, '2026-03-01 09:00:00', 75000), (1, 2, '2026-03-02 14:00:00', 90000), (1, 3, '2026-03-03 19:00:00', 120000), (1, 4, '2026-03-01 22:00:00', 100000),
 (2, 5, '2026-03-01 09:00:00', 75000), (2, 1, '2026-03-02 14:00:00', 90000), (2, 2, '2026-03-03 19:00:00', 120000), (2, 3, '2026-03-01 22:00:00', 100000),
@@ -95,7 +77,6 @@ INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (12, 5, '2026-03-01 09:00:00', 75000), (12, 1, '2026-03-02 14:00:00', 90000), (12, 2, '2026-03-03 19:00:00', 120000), (12, 3, '2026-03-01 22:00:00', 100000),
 (13, 4, '2026-03-01 09:00:00', 75000), (13, 5, '2026-03-02 14:00:00', 90000), (13, 1, '2026-03-03 19:00:00', 120000), (13, 2, '2026-03-01 22:00:00', 100000);
 
--- Batch 2: Rạp 14 đến 25
 INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (14, 3, '2026-03-01 09:00:00', 75000), (14, 4, '2026-03-02 14:00:00', 90000), (14, 5, '2026-03-03 19:00:00', 120000), (14, 1, '2026-03-01 22:00:00', 100000),
 (15, 2, '2026-03-01 09:00:00', 75000), (15, 3, '2026-03-02 14:00:00', 90000), (15, 4, '2026-03-03 19:00:00', 120000), (15, 5, '2026-03-01 22:00:00', 100000),
@@ -110,7 +91,6 @@ INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (24, 3, '2026-03-01 09:00:00', 75000), (24, 4, '2026-03-02 14:00:00', 90000), (24, 5, '2026-03-03 19:00:00', 120000), (24, 1, '2026-03-01 22:00:00', 100000),
 (25, 2, '2026-03-01 09:00:00', 75000), (25, 3, '2026-03-02 14:00:00', 90000), (25, 4, '2026-03-03 19:00:00', 120000), (25, 5, '2026-03-01 22:00:00', 100000);
 
--- Batch 3: Rạp 26 đến 37
 INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (26, 1, '2026-03-01 09:00:00', 75000), (26, 2, '2026-03-02 14:00:00', 90000), (26, 3, '2026-03-03 19:00:00', 120000), (26, 4, '2026-03-01 22:00:00', 100000),
 (27, 5, '2026-03-01 09:00:00', 75000), (27, 1, '2026-03-02 14:00:00', 90000), (27, 2, '2026-03-03 19:00:00', 120000), (27, 3, '2026-03-01 22:00:00', 100000),
@@ -125,7 +105,6 @@ INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (36, 1, '2026-03-01 09:00:00', 75000), (36, 2, '2026-03-02 14:00:00', 90000), (36, 3, '2026-03-03 19:00:00', 120000), (36, 4, '2026-03-01 22:00:00', 100000),
 (37, 5, '2026-03-01 09:00:00', 75000), (37, 1, '2026-03-02 14:00:00', 90000), (37, 2, '2026-03-03 19:00:00', 120000), (37, 3, '2026-03-01 22:00:00', 100000);
 
--- Batch 4: Rạp 38 đến 50
 INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (38, 4, '2026-03-01 09:00:00', 75000), (38, 5, '2026-03-02 14:00:00', 90000), (38, 1, '2026-03-03 19:00:00', 120000), (38, 2, '2026-03-01 22:00:00', 100000),
 (39, 3, '2026-03-01 09:00:00', 75000), (39, 4, '2026-03-02 14:00:00', 90000), (39, 5, '2026-03-03 19:00:00', 120000), (39, 1, '2026-03-01 22:00:00', 100000),
@@ -141,9 +120,9 @@ INSERT INTO LichChieu (ma_rap, ma_phim, ngay_gio_chieu, gia_ve) VALUES
 (49, 3, '2026-03-01 09:00:00', 75000), (49, 4, '2026-03-02 14:00:00', 90000), (49, 5, '2026-03-03 19:00:00', 120000), (49, 1, '2026-03-01 22:00:00', 100000),
 (50, 2, '2026-03-01 09:00:00', 75000), (50, 3, '2026-03-02 14:00:00', 90000), (50, 4, '2026-03-03 19:00:00', 120000), (50, 5, '2026-03-01 22:00:00', 100000);
 
--- Đoạn script này tạo 160 ghế cho mỗi rạp (tổng 800 ghế cho 5 rạp)
--- Hàng E, F là ghế Vip, còn lại là ghế Thuong
-
+-- 8. Thêm ghế cho tất cả rạp (8,000 ghế: 160 ghế/rạp × 50 rạp)
+-- Cấu trúc: 10 hàng (A-J) × 16 ghế/hàng
+-- Loại ghế: Hàng E, F là Vip, còn lại là Thuong
 INSERT INTO Ghe (ten_ghe, loai_ghe, ma_rap)
 SELECT 
     CONCAT(hang, so) AS ten_ghe,
@@ -167,3 +146,9 @@ CROSS JOIN (
     SELECT ma_rap FROM RapPhim -- Lấy tất cả mã rạp hiện có
 ) AS r
 ORDER BY r.ma_rap, hang, so;
+
+-- =============================================
+-- KẾT THÚC INSERT DỮ LIỆU MẪU
+-- Tổng cộng: 2 users, 5 phim, 3 banners, 5 hệ thống rạp, 
+-- 10 cụm rạp, 50 rạp phim, 200 lịch chiếu, 8000 ghế
+-- =============================================

@@ -4,17 +4,17 @@ API backend cho hệ thống quản lý đặt vé rạp phim, xây dựng với
 
 ## 📋 Mục lục
 
-- [Công nghệ sử dụng](#công-nghệ-sử-dụng)
-- [Yêu cầu hệ thống](#yêu-cầu-hệ-thống)
-- [Cài đặt](#cài-đặt)
-- [Cấu hình](#cấu-hình)
-- [Chạy ứng dụng](#chạy-ứng-dụng)
-- [API Documentation](#api-documentation)
-- [Postman Collection](#postman-collection)
-- [Đặc tả API](#đặc-tả-api)
-- [Cấu trúc Database](#cấu-trúc-database)
-- [Thông tin tài khoản Test](#thông-tin-tài-khoản-test)
-- [Troubleshooting](#troubleshooting)
+- [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
+- [Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
+- [Cài đặt](#️-cài-đặt)
+- [Chạy ứng dụng](#️-chạy-ứng-dụng)
+- [API Documentation](#-api-documentation)
+- [Postman Collection](#-postman-collection)
+- [Đặc tả API](#-đặc-tả-api)
+- [Cấu trúc Database](#️-cấu-trúc-database)
+- [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
+- [Thông tin tài khoản Test](#-thông-tin-tài-khoản-test)
+- [Troubleshooting](#-troubleshooting)
 
 ## 🚀 Công nghệ sử dụng
 
@@ -211,9 +211,9 @@ http://localhost:3069/api-docs
 
 ### Option 2: Postman Collection (Recommended cho testing chuyên sâu)
 
-Import Postman collection từ folder `postman/` (xem hướng dẫn chi tiết ở phần [Postman Collection](#postman-collection))
+Import Postman collection từ folder `postman/` (xem hướng dẫn chi tiết ở phần [Postman Collection](#-postman-collection))
 
-**Chi tiết đầy đủ về tất cả endpoints**: Xem phần [Đặc tả API](#đặc-tả-api)
+**Chi tiết đầy đủ về tất cả endpoints**: Xem phần [Đặc tả API](#-đặc-tả-api)
 
 ---
 
