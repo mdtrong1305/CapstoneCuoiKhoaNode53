@@ -134,6 +134,7 @@ export class TicketService {
     }
 
     try {
+      // sử dụng transaction để lock các ghế đang được đặt, tránh tình trạng tranh chấp khi nhiều người cùng đặt vé cho suất chiếu và ghế giống nhau
       return await this.prisma.$transaction(async (tx) => {
         // kiểm tra xem các ghế này đã có ai đặt cho suất chiếu này chưa
         const gheViPham = await tx.chiTietDatVe.findMany({

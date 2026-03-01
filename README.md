@@ -804,7 +804,7 @@ Lịch chiếu C: 21:00 ❌ (Trùng với thời gian nghỉ)
 - ✅ Tất cả success response được chuẩn hóa qua ResponseSuccessInterceptor
 - ✅ Consistent response structure cho dễ dàng xử lý ở client
 
----## �🗄️ Cấu trúc Database
+## 🗄️ Cấu trúc Database
 
 ### Các bảng chính:
 
